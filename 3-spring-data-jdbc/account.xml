@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<array-list>
+    <account>
+        <created-date>2016-02-28T00:00:00.000-06:00</created-date>
+        <balance>125590.5500</balance>
+        <account-number>00112233445566</account-number>
+        <customer>
+            <id>1</id>
+        </customer>
+        <id>1</id>
+    </account>
+    <account>
+        <created-date>2016-02-20T00:00:00.000-06:00</created-date>
+        <balance>150000.0000</balance>
+        <account-number>00112233445577</account-number>
+        <customer>
+            <id>1</id>
+        </customer>
+        <id>2</id>
+    </account>
+</array-list>

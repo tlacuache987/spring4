@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<bean
+		class="org.certificatic.spring.core.tarea2.namespaces.pcutil.bean.Persona"
+		p:nombre="Ivan García" p:auto-ref="autoBean" />
+
+	<bean id="autoBean"
+		class="org.certificatic.spring.core.tarea2.namespaces.pcutil.bean.Auto"
+		c:marca="Seat" c:modelo-ref="modeloStringBean" />
+
+	<bean id="modeloStringBean" class="java.lang.String" c:_0="Leon Cupra" />
+
+	<bean
+		class="org.certificatic.spring.core.tarea2.namespaces.pcutil.bean.Circulo"
+		p:radio="5.55">
+		<property name="pi">
+			<util:constant static-field="java.lang.Math.PI" />
+		</property>
+	</bean>
+
+	<bean id="miAgendaBean"
+		class="org.certificatic.spring.core.tarea2.namespaces.pcutil.bean.Agenda">
+		<property name="notas" ref="misNotasBean" />
+		<property name="autosFamilia" ref="autosfamiliaBean" />
+		<property name="numeros" ref="numerosBean" />
+		<property name="properties" ref="misPropertiesBean" />
+	</bean>
+
+	<util:list id="misNotasBean" list-class="java.util.ArrayList"
+		value-type="java.lang.String">
+		<value>Una Nota</value>
+		<value>Otra Nota</value>
+		<value>To Do</value>
+	</util:list>
+
+	<util:set id="autosfamiliaBean" set-class="java.util.HashSet">
+		<ref bean="autoBean" />
+		<ref bean="autoBean" />
+	</util:set>
+
+	<util:map id="numerosBean" map-class="java.util.HashMap">
+		<entry key="uno" value="1" />
+		<entry key="dos" value="2" />
+	</util:map>
+
+	<util:properties id="misPropertiesBean"
+		location="classpath:/spring/tarea2/properties/*.properties">
+		<prop key="programmer.name">Paula Sofía</prop>
+	</util:properties>
+
+	<bean
+		class="org.certificatic.spring.core.tarea2.namespaces.pcutil.bean.MisProperties">
+		<property name="programmerName" value="#{misPropertiesBean['programmer.name']}" />
+		<property name="nombreCurso" value="#{miAgendaBean.properties['curso.nombre']}" />
+		<property name="nombreHijo" value="#{misPropertiesBean['familia.hijo.nombre']}" />
+	</bean>
+</beans>

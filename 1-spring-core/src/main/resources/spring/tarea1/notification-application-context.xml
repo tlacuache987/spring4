@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean
+		class="org.certificatic.spring.core.tarea1.messaging.service.api.impl.NotificationServiceImpl">
+		<property name="facebookMessageService" ref="facebookMessageServiceBean" />
+		<property name="emailMessageService">
+			<ref bean="emailMessageServiceBean" />
+		</property>
+		<property name="twitterMessageService">
+			<bean
+				class="org.certificatic.spring.core.tarea1.messaging.service.api.impl.TwitterMessageServiceImpl" />
+		</property>
+	</bean>
+
+	<bean id="facebookMessageServiceBean"
+		class="org.certificatic.spring.core.tarea1.notification.service.api.impl.FacebookMessageServiceImpl" />
+
+	<bean id="emailMessageServiceBean"
+		class="org.certificatic.spring.core.tarea1.messaging.service.api.impl.EmailMessageServiceImpl" />
+
+</beans>

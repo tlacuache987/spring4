@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-lazy-init="default">
+
+	<bean class="org.certificatic.spring.core.practica7.lazyinit.bean.Car"
+		lazy-init="true">
+		<property name="engine" ref="engineBean" />
+		<property name="wheel1" ref="wheelBean" />
+		<property name="wheel2" ref="wheelBean" />
+		<property name="wheel3" ref="wheelBean" />
+		<property name="wheel4" ref="wheelBean" />
+	</bean>
+
+	<bean id="engineBean"
+		class="org.certificatic.spring.core.practica7.lazyinit.bean.Engine">
+		<property name="hp" value="280" />
+		<property name="cylinderNumber" value="4" />
+		<property name="serial" value="ABC-132123" />
+	</bean>
+
+	<bean id="wheelBean"
+		class="org.certificatic.spring.core.practica7.lazyinit.bean.Wheel"
+		scope="prototype">
+		<property name="brand" value="Pirelli" />
+		<property name="material" value="Pet y caucho" />
+		<property name="rinSize" value="18" />
+	</bean>
+
+</beans>

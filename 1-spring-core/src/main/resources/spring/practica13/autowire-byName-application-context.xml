@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<bean class="org.certificatic.spring.core.practica13.autowire.bean.Car"
+		autowire="byName" scope="prototype" />
+
+	<bean id="engine"
+		class="org.certificatic.spring.core.practica13.autowire.bean.Engine"
+		p:model="V8 Twin Turbo" p:cylinderNumber="8" p:serialNumber="ABC-123-XYZ"
+		scope="prototype" />
+
+	<bean id="wheelGroup"
+		class="org.certificatic.spring.core.practica13.autowire.bean.WheelGroup"
+		autowire="byName" scope="prototype" />
+
+	<util:list id="wheelList" list-class="java.util.ArrayList"
+		scope="prototype">
+		<ref bean="wheel" />
+		<ref bean="wheel" />
+		<ref bean="wheel" />
+		<ref bean="wheel" />
+	</util:list>
+
+	<bean id="wheel"
+		class="org.certificatic.spring.core.practica13.autowire.bean.Wheel"
+		p:material="Caucho doble con spandex y PET" p:speedIndicator="250 75 Y"
+		p:rinSize="18" scope="prototype" />
+
+</beans>

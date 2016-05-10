@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="personaPrototypeBean"
+		class="org.certificatic.spring.core.practica5.scopes.bean.Persona"
+		scope="prototype" />
+
+	<bean name="personaSingletonBean"
+		class="org.certificatic.spring.core.practica5.scopes.bean.Persona"
+		scope="singleton" />
+
+	<bean id="customScopeBean"
+		class="org.certificatic.spring.core.practica5.scopes.custom.bean.CustomScope" />
+
+	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+		<property name="scopes">
+			<map>
+				<entry key="customscope">
+					<ref bean="customScopeBean" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean name="personaCustomscopeBean"
+		class="org.certificatic.spring.core.practica5.scopes.bean.Persona"
+		scope="customscope" />
+
+</beans>

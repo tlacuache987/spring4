@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<bean id="gessNumberBean"
+		class="org.certificatic.spring.core.practica21.spel.bean.GuessNumber">
+		<property name="randomNumber" value="#{ T(java.lang.Math).random() * 100.0 }" />
+	</bean>
+
+	<bean class="org.certificatic.spring.core.practica21.spel.bean.Magician">
+		<property name="initialNumber" value="#{gessNumberBean.randomNumber}" />
+	</bean>
+
+	<bean
+		class="org.certificatic.spring.core.practica21.spel.bean.MyBeanResolver" />
+
+
+	<bean id="societyStub"
+		class="org.certificatic.spring.core.practica21.test.spel.model.stub.SocietyStub" />
+
+	<bean id="teslaBean"
+		class="org.certificatic.spring.core.practica21.spel.model.Inventor"
+		factory-bean="societyStub" factory-method="createInventorTesla" />
+
+	<!-- Method injection -->
+	<bean
+		class="org.certificatic.spring.core.practica21.methodinjection.bean.SingletonBean">
+		<lookup-method name="getProcessor" bean="stringProcessor" />
+		<property name="iterations" value="3" />
+	</bean>
+
+	<bean id="stringProcessor" scope="prototype"
+		class="org.certificatic.spring.core.practica21.methodinjection.bean.api.impl.StringProcessor" />
+
+</beans>

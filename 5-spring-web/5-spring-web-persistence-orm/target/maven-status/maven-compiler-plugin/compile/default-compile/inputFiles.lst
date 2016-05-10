@@ -1,0 +1,15 @@
+C:\Users\Ivan\Documents\workspace-certificatic-spring-profesor\5-spring-web\5-spring-web-persistence-orm\src\main\java\org\certificatic\spring\soba\dao\hibernate\validation\api\IValidator.java
+C:\Users\Ivan\Documents\workspace-certificatic-spring-profesor\5-spring-web\5-spring-web-persistence-orm\src\main\java\org\certificatic\spring\soba\dao\hibernate\validation\api\impl\CustomValidatorImpl.java
+C:\Users\Ivan\Documents\workspace-certificatic-spring-profesor\5-spring-web\5-spring-web-persistence-orm\src\main\java\org\certificatic\spring\soba\dao\hibernate\validation\api\impl\ValidatorTemplate.java
+C:\Users\Ivan\Documents\workspace-certificatic-spring-profesor\5-spring-web\5-spring-web-persistence-orm\src\main\java\org\certificatic\spring\soba\dao\hibernate\impl\AuthorityDAO.java
+C:\Users\Ivan\Documents\workspace-certificatic-spring-profesor\5-spring-web\5-spring-web-persistence-orm\src\main\java\org\certificatic\spring\soba\dao\hibernate\validation\api\impl\ValidatorImpl.java
+C:\Users\Ivan\Documents\workspace-certificatic-spring-profesor\5-spring-web\5-spring-web-persistence-orm\src\main\java\org\certificatic\spring\soba\dao\hibernate\impl\CustomerDAO.java
+C:\Users\Ivan\Documents\workspace-certificatic-spring-profesor\5-spring-web\5-spring-web-persistence-orm\src\main\java\org\certificatic\spring\soba\dao\hibernate\impl\MovementDAO.java
+C:\Users\Ivan\Documents\workspace-certificatic-spring-profesor\5-spring-web\5-spring-web-persistence-orm\src\main\java\org\certificatic\spring\soba\dao\hibernate\validation\api\IValidatorTemplate.java
+C:\Users\Ivan\Documents\workspace-certificatic-spring-profesor\5-spring-web\5-spring-web-persistence-orm\src\main\java\org\certificatic\spring\soba\dao\hibernate\exceptions\ValidatorException.java
+C:\Users\Ivan\Documents\workspace-certificatic-spring-profesor\5-spring-web\5-spring-web-persistence-orm\src\main\java\org\certificatic\spring\soba\dao\hibernate\impl\GenericEntityDAO.java
+C:\Users\Ivan\Documents\workspace-certificatic-spring-profesor\5-spring-web\5-spring-web-persistence-orm\src\main\java\org\certificatic\spring\soba\dao\hibernate\validation\api\ICustomValidator.java
+C:\Users\Ivan\Documents\workspace-certificatic-spring-profesor\5-spring-web\5-spring-web-persistence-orm\src\main\java\org\certificatic\spring\soba\dao\hibernate\impl\UserDAO.java
+C:\Users\Ivan\Documents\workspace-certificatic-spring-profesor\5-spring-web\5-spring-web-persistence-orm\src\main\java\org\certificatic\spring\soba\dao\hibernate\exceptions\ValidationError.java
+C:\Users\Ivan\Documents\workspace-certificatic-spring-profesor\5-spring-web\5-spring-web-persistence-orm\src\main\java\org\certificatic\spring\soba\dao\hibernate\exceptions\GenericErrorMessage.java
+C:\Users\Ivan\Documents\workspace-certificatic-spring-profesor\5-spring-web\5-spring-web-persistence-orm\src\main\java\org\certificatic\spring\soba\dao\hibernate\impl\AccountDAO.java

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="login" extends="login.definition">
+		<put-attribute name="content" value="/WEB-INF/views/login.jsp"></put-attribute>
+	</definition>
+
+	<definition name="welcome" extends="layout.definition">
+		<put-attribute name="content" value="/WEB-INF/views/admin/welcome/welcome.jsp"></put-attribute>
+	</definition>
+
+	<definition name="dashboard" extends="layout.definition">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/dashboard/dashboard.jsp"></put-attribute>
+	</definition>
+
+	<definition name="error404" extends="error.404.definition" />
+
+</tiles-definitions>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="movieListenerBean"
+		class="org.certificatic.spring.core.practica4.movies.service.MovieListener">
+		<constructor-arg ref="movieFinderBean" />
+	</bean>
+
+	<bean id="movieFinderBean"
+		class="org.certificatic.spring.core.practica4.movies.api.impl.MovieFinderImpl" />
+
+</beans>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<context:annotation-config />
+
+	<bean
+		class="org.certificatic.spring.core.practica15.autowired.methods.bean.Student" />
+
+	<bean class="java.lang.String">
+		<constructor-arg>
+			<value>Lara Croft</value>
+		</constructor-arg>
+	</bean>
+
+	<bean class="java.lang.Integer">
+		<constructor-arg>
+			<value>32</value>
+		</constructor-arg>
+	</bean>
+
+	<bean
+		class="org.certificatic.spring.core.practica15.autowired.methods.bean.StudentBook">
+		<property name="brand" value="History Class" />
+		<property name="size" value="Letter" />
+	</bean>
+
+	<bean
+		class="org.certificatic.spring.core.practica15.autowired.methods.bean.PropellingPencil">
+		<property name="inkColor">
+			<util:constant static-field="java.awt.Color.YELLOW" />
+		</property>
+	</bean>
+
+</beans>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="conexionBeanTemplate" init-method="connect"
+		destroy-method="disconnect" scope="singleton" abstract="true">
+		<property name="database" value="pepitoRoot_Admin2" />
+		<property name="password" value="WEF#WDfsd.789871234EWR" />
+		<property name="debugMode" value="false" />
+	</bean>
+
+	<bean id="conexionProduccionBean"
+		class="org.certificatic.spring.core.practica9.beandefinitioninheritance.bean.ConnectionDataBase"
+		parent="conexionBeanTemplate">
+		<property name="database" value="produccionDB001" />
+	</bean>
+
+	<bean id="conexionPruebasBean"
+		class="org.certificatic.spring.core.practica9.beandefinitioninheritance.bean.ConnectionDataBase"
+		parent="conexionBeanTemplate">
+		<property name="database" value="testDB101" />
+		<property name="debugMode" value="true" />
+	</bean>
+
+</beans>
