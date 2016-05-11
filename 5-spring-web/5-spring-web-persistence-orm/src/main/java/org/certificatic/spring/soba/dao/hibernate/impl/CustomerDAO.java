@@ -11,4 +11,11 @@ public class CustomerDAO extends GenericEntityDAO<Customer, Long> implements ICu
 		super(Customer.class);
 	}
 
+	@Override
+	public Customer getCustomerByUsername(String username) {
+		return (Customer) this.sessionFactory.getCurrentSession()
+				.createQuery("FROM " + this.persistentClass.getName() + " WHERE user.username = '" + username + "'")
+				.uniqueResult();
+	}
+
 }

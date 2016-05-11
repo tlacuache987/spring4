@@ -11,4 +11,11 @@ public class UserDAO extends GenericEntityDAO<User, Long> implements IUserDAO {
 		super(User.class);
 	}
 
+	@Override
+	public User findByUsername(String username) {
+		return (User) this.sessionFactory.getCurrentSession()
+				.createQuery("FROM " + this.persistentClass.getName() + " WHERE username = '" + username + "'")
+				.uniqueResult();
+	}
+
 }

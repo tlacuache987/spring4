@@ -10,9 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -31,8 +29,8 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table(name = "USER_TBL")
-@ToString(exclude = { "customer", "authorities" })
-@EqualsAndHashCode(exclude = { "customer", "authorities" })
+@ToString(exclude = { "authorities" })
+@EqualsAndHashCode(exclude = { "authorities" })
 public class User implements UserDetails {
 
 	private static final long serialVersionUID = -6127081844917378388L;
@@ -42,9 +40,9 @@ public class User implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	/*@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_CUSTOMER_ID")
-	private Customer customer;
+	private Customer customer;*/
 
 	@Column(name = "USERNAME")
 	private String username;

@@ -17,7 +17,7 @@ public class AuthorityDAO extends GenericEntityDAO<Authority, Long> implements I
 	@SuppressWarnings("unchecked")
 	public List<Authority> findByUserId(Long id) {
 		return (List<Authority>) this.sessionFactory.getCurrentSession()
-				.createQuery("FROM " + this.persistentClass.getName() + " WHERE user.customer.id = " + id).list();
+				.createQuery("FROM " + this.persistentClass.getName() + " WHERE user.id = " + id).list();
 	}
 
 }

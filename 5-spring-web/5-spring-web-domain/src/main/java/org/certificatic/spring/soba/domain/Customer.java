@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -34,7 +35,7 @@ import lombok.ToString;
 @Table(name = "CUSTOMER_TBL")
 @ToString(exclude = { "accounts" })
 @EqualsAndHashCode(exclude = { "accounts" })
-public class Customer {
+public class Customer implements ILogableUser {
 
 	@Id
 	@Column(name = "CUSTOMER_ID")
@@ -47,7 +48,9 @@ public class Customer {
 	@Column(name = "LAST_NAME")
 	private String lastName;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "customer")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	// , mappedBy = "customer"
+	@JoinColumn(name = "FK_USER_ID")
 	private User user;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")

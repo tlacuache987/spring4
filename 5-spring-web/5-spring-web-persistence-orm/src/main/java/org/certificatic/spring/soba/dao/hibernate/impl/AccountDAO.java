@@ -17,7 +17,7 @@ public class AccountDAO extends GenericEntityDAO<Account, Long> implements IAcco
 	@SuppressWarnings("unchecked")
 	public List<Account> findByCustomerId(Long id) {
 		return (List<Account>) this.sessionFactory.getCurrentSession()
-				.createQuery("FROM " + this.persistentClass.getName() + " WHERE customer = " + id)
+				.createQuery("FROM " + this.persistentClass.getName() + " WHERE customer.id = " + id)
 				.list();
 	}
 

@@ -75,7 +75,7 @@ public class UserDAOTest {
 		Assert.assertEquals(account_2, accounts.get(1));
 
 		log.info("user: {}", user);
-		log.info("user.customer: {}", user.getCustomer());
+		log.info("customer:user {}", customer.getUser());
 		log.info("customer: {}", customer);
 
 		log.info("accounts: {}", accounts);

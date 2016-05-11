@@ -1,10 +1,10 @@
 package org.certificatic.spring.jdbc.practica25.test.dao.springjdbc;
 
-import org.certificatic.spring.jdbc.dao.api.IAccountDAO;
-import org.certificatic.spring.jdbc.dao.api.ICustomerDAO;
-import org.certificatic.spring.jdbc.dao.api.IUserDAO;
-import org.certificatic.spring.jdbc.domain.entities.Customer;
-import org.certificatic.spring.jdbc.domain.entities.User;
+import org.certificatic.spring.jdbc.pratica25.dao.api.IAccountDAO;
+import org.certificatic.spring.jdbc.pratica25.dao.api.ICustomerDAO;
+import org.certificatic.spring.jdbc.pratica25.dao.api.IUserDAO;
+import org.certificatic.spring.jdbc.pratica25.domain.entities.Customer;
+import org.certificatic.spring.jdbc.pratica25.domain.entities.User;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,5 +1,10 @@
-insert into CUSTOMER_TBL values(1, 'Ivan Venor', 'García');
-insert into USER_TBL values(1, 1, 'xvanhalenx', '123123', 1, 1, 1, 1);
+insert into USER_TBL values(1, 'xvanhalenx', '123123', 1, 1, 1, 1);
+insert into USER_TBL values(2, 'admin', 'admin', 1, 1, 1, 1);
+
+insert into CUSTOMER_TBL values(1, 1, 'Ivan Venor', 'García');
+insert into ADMIN_TBL values(2, 2, 'Ivan Venor (admin)', 'García');
+
+
 insert into AUTHORITY_TBL values(1, 1, 'ROLE_ADMIN');
 insert into AUTHORITY_TBL values(2, 1, 'ROLE_CUSTOMER');
 

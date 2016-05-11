@@ -6,7 +6,6 @@ drop table if exists MOVEMENT_TBL;
 
 create table USER_TBL(
 	USER_ID integer auto_increment primary key,
-	FK_CUSTOMER_ID integer not null,
 	USERNAME varchar(100) not null,
 	PASSWORD varchar(100) not null,
 	ACCOUNT_NON_EXPIRED int(1) not null,
@@ -17,6 +16,14 @@ create table USER_TBL(
 
 create table CUSTOMER_TBL(
 	CUSTOMER_ID integer auto_increment primary key,
+	FK_USER_ID integer not null,
+	NAME varchar(100) not null,
+	LAST_NAME varchar(100) not null
+);
+
+create table ADMIN_TBL(
+	ADMIN_ID integer auto_increment primary key,
+	FK_USER_ID integer not null,
 	NAME varchar(100) not null,
 	LAST_NAME varchar(100) not null
 );
