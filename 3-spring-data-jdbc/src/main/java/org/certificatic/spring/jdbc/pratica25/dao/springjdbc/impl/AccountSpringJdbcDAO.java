@@ -4,12 +4,11 @@ import java.util.List;
 
 import org.certificatic.spring.jdbc.pratica25.dao.api.IAccountDAO;
 import org.certificatic.spring.jdbc.pratica25.dao.springjdbc.GenericSpringJdbcDAO;
-import org.certificatic.spring.jdbc.pratica25.dao.springjdbc.parameterholder.AccountBeanSqlParameterHolder;
 import org.certificatic.spring.jdbc.pratica25.dao.springjdbc.rowmapper.AccountRowMapper;
 import org.certificatic.spring.jdbc.pratica25.domain.entities.Account;
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -18,32 +17,35 @@ import org.springframework.stereotype.Repository;
 @Profile({ "h2-in-memory", "h2-local", "mysql" })
 public class AccountSpringJdbcDAO extends GenericSpringJdbcDAO<Account, Long> implements IAccountDAO {
 
+	private static final String SELECT_ALL_ACCOUNT_WHERE_CUSTOMER_ID = "SELECT * FROM SPRING_DATA_ACCOUNT_TBL WHERE FK_CUSTOMER_ID = ?";
+	private static final String SELECT_ALL_ACCOUNT = "SELECT * FROM SPRING_DATA_ACCOUNT_TBL";
+	private static final String SELECT_ACCOUNT = "SELECT * FROM SPRING_DATA_ACCOUNT_TBL WHERE ACCOUNT_ID = ?";
+
+	private static final String INSERT_ACCOUNT = "INSERT INTO SPRING_DATA_ACCOUNT_TBL VALUES (null, :fkCustomerId, :accountNumber, :createdDate, :balance)";
+
+	private static final String UPDATE_ACCOUNT_WHERE_ACCOUNT_ID = "UPDATE SPRING_DATA_ACCOUNT_TBL SET ACCOUNT_NUMBER = ?, CREATED_DATE = ?, BALANCE = ? WHERE ACCOUNT_ID = ?";
+
+	private static final String DELETE_ACCOUNT = "DELETE FROM SPRING_DATA_ACCOUNT_TBL WHERE ACCOUNT_ID = ?";
+
 	@Override
 	public List<Account> findByCustomerId(Long id) {
 
 		// FIND ACCOUNT BY CUSTOMER ID
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("SELECT * FROM SPRING_DATA_ACCOUNT_TBL WHERE FK_CUSTOMER_ID = ?");
-
-		return this.jdbcTemplate.query(sb.toString(), new AccountRowMapper(), id);
+		return this.jdbcTemplate.query(SELECT_ALL_ACCOUNT_WHERE_CUSTOMER_ID, new AccountRowMapper(), id);
 	}
 
 	@Override
 	public void insert(Account entity) {
 		// INSERT Account
-		final String INSERT_ACCOUNT;
-
-		StringBuilder sb = new StringBuilder();
-		sb.append("INSERT INTO SPRING_DATA_ACCOUNT_TBL VALUES (");
-		sb.append("null, :fk_customer_id, :account_number, :created_date, :balance").append(")");
-
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
-		INSERT_ACCOUNT = sb.toString();
+		MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+		parameterSource.addValue("fkCustomerId", entity.getCustomer().getId());
+		parameterSource.addValue("accountNumber", entity.getAccountNumber());
+		parameterSource.addValue("createdDate", entity.getCreatedDate());
+		parameterSource.addValue("balance", entity.getBalance());
 
-		this.namedJdbcTemplate.update(INSERT_ACCOUNT,
-				new BeanPropertySqlParameterSource(new AccountBeanSqlParameterHolder(entity)), keyHolder);
+		this.namedJdbcTemplate.update(INSERT_ACCOUNT, parameterSource, keyHolder);
 
 		entity.setId(keyHolder.getKey().longValue());
 	}
@@ -51,13 +53,8 @@ public class AccountSpringJdbcDAO extends GenericSpringJdbcDAO<Account, Long> im
 	@Override
 	public void update(Account entity) {
 		// UPDATE ACCOUNT
-		StringBuilder sb = new StringBuilder();
-		sb.append("UPDATE SPRING_DATA_ACCOUNT_TBL SET ");
-		sb.append("ACCOUNT_NUMBER = ?, CREATED_DATE = ?, BALANCE = ?");
-		sb.append("WHERE CUSTOMER_ID = ?");
-
-		this.jdbcTemplate.update(sb.toString(), entity.getAccountNumber(), entity.getCreatedDate(),
-				entity.getBalance(), entity.getCustomer().getId());
+		this.jdbcTemplate.update(UPDATE_ACCOUNT_WHERE_ACCOUNT_ID, entity.getAccountNumber(), entity.getCreatedDate(),
+				entity.getBalance(), entity.getId());
 	}
 
 	@Override
@@ -65,11 +62,8 @@ public class AccountSpringJdbcDAO extends GenericSpringJdbcDAO<Account, Long> im
 		Account account = null;
 
 		// FIND ACCOUNT BY ID
-		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT * FROM SPRING_DATA_ACCOUNT_TBL WHERE ACCOUNT_ID = ?");
-
 		try {
-			account = this.jdbcTemplate.queryForObject(sb.toString(), new AccountRowMapper(), id);
+			account = this.jdbcTemplate.queryForObject(SELECT_ACCOUNT, new AccountRowMapper(), id);
 
 		} catch (EmptyResultDataAccessException ex) {
 			// Cuando se usa queryForObject se espera al menos 1 resultado.
@@ -91,9 +85,7 @@ public class AccountSpringJdbcDAO extends GenericSpringJdbcDAO<Account, Long> im
 			return entity;
 
 		// DELETE ACCOUNT
-		final String DELETE_ACCOUNT_TABLE = "DELETE FROM SPRING_DATA_ACCOUNT_TBL WHERE ACCOUNT_ID = ?";
-
-		this.jdbcTemplate.update(DELETE_ACCOUNT_TABLE, entity.getId());
+		this.jdbcTemplate.update(DELETE_ACCOUNT, entity.getId());
 
 		return entity;
 	}
@@ -103,10 +95,7 @@ public class AccountSpringJdbcDAO extends GenericSpringJdbcDAO<Account, Long> im
 		List<Account> userList = null;
 
 		// FIND ALL Account
-		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT * FROM SPRING_DATA_ACCOUNT_TBL");
-
-		userList = this.jdbcTemplate.query(sb.toString(), new AccountRowMapper());
+		userList = this.jdbcTemplate.query(SELECT_ALL_ACCOUNT, new AccountRowMapper());
 
 		return userList;
 	}

@@ -1,4 +1,4 @@
-package org.certificatic.spring.jdbc.practica25.test.dao.springjdbc;
+package org.certificatic.spring.jdbc.practica25.test.dao.springjdbc.parte5;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 // @Transactional
 // @Rollback(false)
 @ActiveProfiles("h2-in-memory")
-public class SpringJdbcDAOTest {
+public class AccountSpringJdbcDAOTest {
 
 	@Autowired
 	private IUserDAO userDAO;
@@ -44,8 +44,8 @@ public class SpringJdbcDAOTest {
 	}
 
 	@Test
-	public void springJdbcDAOTest() {
-		log.info("springJdbcDAOTest -------------------");
+	public void accountSpringJdbcDAOTest() {
+		log.info("accountSpringJdbcDAOTest -------------------");
 
 		User user = userDAO.findById(1L);
 

@@ -9,5 +9,4 @@
 		<jdbc:script location="classpath:/db/data.sql" />
 	</jdbc:embedded-database>
 
-
 </beans>

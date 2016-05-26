@@ -2,67 +2,67 @@ package org.certificatic.spring.jdbc.pratica25.dao.springjdbc.impl.h2;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.certificatic.spring.jdbc.pratica25.dao.api.ICustomerDAO;
 import org.certificatic.spring.jdbc.pratica25.dao.springjdbc.GenericSpringJdbcDAO;
-import org.certificatic.spring.jdbc.pratica25.dao.springjdbc.parameterholder.CustomerBeanSqlParameterHolder;
-import org.certificatic.spring.jdbc.pratica25.dao.springjdbc.parameterholder.CustomerUserBeanSqlParameterHolder;
-import org.certificatic.spring.jdbc.pratica25.dao.springjdbc.parameterholder.UserBeanSqlParameterHolder;
+import org.certificatic.spring.jdbc.pratica25.dao.springjdbc.rowmapper.CustomerRowMapper;
 import org.certificatic.spring.jdbc.pratica25.domain.entities.Customer;
 import org.certificatic.spring.jdbc.pratica25.domain.entities.User;
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Repository
 @Profile({ "h2-in-memory", "h2-local" })
 public class CustomerSpringJdbcDAO extends GenericSpringJdbcDAO<Customer, Long> implements ICustomerDAO {
+
+	private static final String INSERT_CUSTOMER = "INSERT INTO SPRING_DATA_CUSTOMER_TBL VALUES (null, :name, :lastName)";
+	private static final String INSERT_USER = "INSERT INTO SPRING_DATA_USER_TBL VALUES (null, :fkCustomerId, :username, :password)";
+
+	private static final String UPDATE_CUSTOMER = "UPDATE SPRING_DATA_CUSTOMER_TBL SET NAME = :name, LAST_NAME = :lastName WHERE CUSTOMER_ID = :customerId";
+	private static final String UPDATE_USER = "UPDATE SPRING_DATA_USER_TBL SET USERNAME = :username, PASSWORD = :password WHERE USER_ID = :userId";
+
+	private static final String SELECT_CUSTOMER = "SELECT * FROM SPRING_DATA_CUSTOMER_TBL WHERE CUSTOMER_ID = :customerId";
+	private static final String SELECT_USER_WHERE_CUSTOMER_ID = "SELECT * FROM SPRING_DATA_USER_TBL WHERE FK_CUSTOMER_ID = :customerId";
+
+	private static final String SELECT_ALL_CUSTOMER_USER = "SELECT * FROM SPRING_DATA_CUSTOMER_TBL, SPRING_DATA_USER_TBL WHERE CUSTOMER_ID = FK_CUSTOMER_ID";
+
+	private static final String DELETE_ACCOUNT_TABLE_WHERE_CUSTOMER_ID = "DELETE FROM SPRING_DATA_ACCOUNT_TBL WHERE FK_CUSTOMER_ID = :customerId";
+	private static final String DELETE_USER_WHERE_USER_ID = "DELETE FROM SPRING_DATA_USER_TBL WHERE USER_ID = :userId";
+	private static final String DELETE_CUSTOMER_WHERE_CUSTOMER_ID = "DELETE FROM SPRING_DATA_CUSTOMER_TBL WHERE CUSTOMER_ID = :customerId";
 
 	@Override
 	public void insert(Customer entity) {
 
 		// INSERT CUSTOMER
-		StringBuilder sb = new StringBuilder();
-		sb.append("INSERT INTO SPRING_DATA_CUSTOMER_TBL VALUES (");
-		sb.append("null, :name, :last_name").append(")");
-
-		MapSqlParameterSource paramParameters = new MapSqlParameterSource();
-		paramParameters.addValue("name", entity.getName());
-		paramParameters.addValue("last_name", entity.getLastName());
+		MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+		parameterSource.addValue("name", entity.getName());
+		parameterSource.addValue("lastName", entity.getLastName());
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
-		this.namedJdbcTemplate.update(sb.toString(), paramParameters, keyHolder);
+		this.namedJdbcTemplate.update(INSERT_CUSTOMER, parameterSource, keyHolder);
 
 		entity.setId(keyHolder.getKey().longValue());
 
 		// INSERT USER
-		sb.delete(0, sb.length());
-		sb.append("INSERT INTO SPRING_DATA_USER_TBL VALUES (");
-		sb.append("null, :fkCustomerId, :username, :password").append(")");
-
-		paramParameters = new MapSqlParameterSource();
-		paramParameters.addValue("fkCustomerId", entity.getUser().getCustomer().getId());
-		paramParameters.addValue("username", entity.getUser().getUsername());
-		paramParameters.addValue("password", entity.getUser().getPassword());
+		parameterSource = new MapSqlParameterSource();
+		parameterSource.addValue("fkCustomerId", entity.getUser().getCustomer().getId());
+		parameterSource.addValue("username", entity.getUser().getUsername());
+		parameterSource.addValue("password", entity.getUser().getPassword());
 
 		keyHolder = new GeneratedKeyHolder();
 
-		this.namedJdbcTemplate.update(sb.toString(), paramParameters, keyHolder);
+		this.namedJdbcTemplate.update(INSERT_USER, parameterSource, keyHolder);
 
 		entity.getUser().setId(keyHolder.getKey().longValue());
 	}
@@ -71,55 +71,51 @@ public class CustomerSpringJdbcDAO extends GenericSpringJdbcDAO<Customer, Long> 
 	public void update(Customer entity) {
 
 		// UPDATE CUSTOMER
-		StringBuilder sb = new StringBuilder();
-		sb.append("UPDATE SPRING_DATA_CUSTOMER_TBL SET ");
-		sb.append("NAME = :name, LAST_NAME = :last_name ");
-		sb.append("WHERE CUSTOMER_ID = :customer_id");
+		Map<String, Object> mapParameters = new HashMap<>();
+		mapParameters.put("name", entity.getName());
+		mapParameters.put("lastName", entity.getLastName());
+		mapParameters.put("customerId", entity.getId());
 
-		this.namedJdbcTemplate.update(sb.toString(),
-				new BeanPropertySqlParameterSource(new CustomerBeanSqlParameterHolder(entity)));
+		this.namedJdbcTemplate.update(UPDATE_CUSTOMER, mapParameters);
 
 		// UPDATE USER
-		sb.delete(0, sb.length());
-		sb.append("UPDATE SPRING_DATA_USER_TBL SET ");
-		sb.append("USERNAME = :username, PASSWORD = :password ");
-		sb.append("WHERE USER_ID = :user_id");
+		mapParameters = new HashMap<>();
+		mapParameters.put("username", entity.getUser().getUsername());
+		mapParameters.put("password", entity.getUser().getPassword());
+		mapParameters.put("userId", entity.getUser().getId());
 
-		this.namedJdbcTemplate.update(sb.toString(),
-				new BeanPropertySqlParameterSource(new UserBeanSqlParameterHolder(entity.getUser())));
+		this.namedJdbcTemplate.update(UPDATE_USER, mapParameters);
 
 	}
 
 	@Override
 	public Customer findById(Long id) {
-		Customer c = null;
+		Customer customer = null;
 
 		// FIND CUSTOMER BY ID
-		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT * FROM SPRING_DATA_CUSTOMER_TBL WHERE CUSTOMER_ID = :customerId");
-
-		MapSqlParameterSource paramParameters = new MapSqlParameterSource();
-		paramParameters.addValue("customerId", id);
+		MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+		parameterSource.addValue("customerId", id);
 
 		try {
+			/*
 			///////////////////////////////////////////////////////////
 			Map<String, Object> paramMap = new HashMap<>();
 			paramMap.put("customerId", id);
-
+			
 			String username = this.namedJdbcTemplate.queryForObject(
 					"SELECT username FROM SPRING_DATA_USER_TBL WHERE FK_CUSTOMER_ID = :customerId", paramMap,
 					String.class);
 			log.info("lol username: {}", username);
-
+			
 			SqlParameterSource paramSource = new MapSqlParameterSource().addValue("customerId", id);
-
+			
 			username = this.namedJdbcTemplate.queryForObject(
 					"SELECT username FROM SPRING_DATA_USER_TBL WHERE FK_CUSTOMER_ID = :customerId", paramSource,
 					String.class);
 			log.info("lol username: {}", username);
-
+			
 			paramSource = new MapSqlParameterSource().addValue("customerId", id);
-
+			
 			User us = this.namedJdbcTemplate.queryForObject(
 					"SELECT * FROM SPRING_DATA_USER_TBL WHERE FK_CUSTOMER_ID = :customerId", paramSource,
 					new RowMapper<User>() {
@@ -133,66 +129,68 @@ public class CustomerSpringJdbcDAO extends GenericSpringJdbcDAO<Customer, Long> 
 						}
 					});
 			log.info("lol user: {}", us);
-
+			
 			paramSource = new MapSqlParameterSource().addValue("customerId", id);
-
+			
 			Map<String, Object> mapResult = this.namedJdbcTemplate.queryForMap(
 					"SELECT * FROM SPRING_DATA_USER_TBL WHERE FK_CUSTOMER_ID = :customerId", paramSource);
-
+			
 			log.info("lol mapResult: {}", mapResult);
-
+			
 			paramMap = new HashMap<>();
 			paramMap.put("customerId", id);
-
+			
 			mapResult = this.namedJdbcTemplate.queryForMap(
 					"SELECT * FROM SPRING_DATA_USER_TBL WHERE FK_CUSTOMER_ID = :customerId", paramMap);
-
+			
 			log.info("lol mapResult: {}", mapResult);
-
+			
 			paramMap = new HashMap<>();
 			paramMap.put("customerId", 0);
-
+			
 			List<String> usernames = this.namedJdbcTemplate.queryForList(
 					"SELECT username FROM SPRING_DATA_USER_TBL WHERE FK_CUSTOMER_ID > :customerId", paramMap,
 					String.class);
-
+			
 			log.info("lol usernames: {}", usernames);
-
+			
 			paramSource = new MapSqlParameterSource().addValue("customerId", 0);
-
+			
 			usernames = this.namedJdbcTemplate.queryForList(
 					"SELECT username FROM SPRING_DATA_USER_TBL WHERE FK_CUSTOMER_ID > :customerId", paramSource,
 					String.class);
-
+			
 			log.info("lol usernames: {}", usernames);
-
+			
 			paramMap = new HashMap<>();
 			paramMap.put("customerId", 0);
-
+			
 			List<Map<String, Object>> data = this.namedJdbcTemplate.queryForList(
 					"SELECT * FROM SPRING_DATA_USER_TBL WHERE FK_CUSTOMER_ID > :customerId", paramMap);
-
+			
 			log.info("lol data: {}", data);
-
+			
 			paramSource = new MapSqlParameterSource().addValue("customerId", 0);
-
+			
 			data = this.namedJdbcTemplate.queryForList(
 					"SELECT * FROM SPRING_DATA_USER_TBL WHERE FK_CUSTOMER_ID > :customerId", paramSource);
-
+			
 			log.info("lol data: {}", data);
-
+			
 			///////////////////////////////////////////////////////////
+			*/
 
-			c = this.namedJdbcTemplate.queryForObject(sb.toString(), paramParameters, new RowMapper<Customer>() {
-				@Override
-				public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
-					Customer customer = new Customer();
-					customer.setId(rs.getLong("CUSTOMER_ID"));
-					customer.setName(rs.getString("NAME"));
-					customer.setLastName(rs.getString("LAST_NAME"));
-					return customer;
-				}
-			});
+			customer = this.namedJdbcTemplate.queryForObject(SELECT_CUSTOMER, parameterSource,
+					new RowMapper<Customer>() {
+						@Override
+						public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
+							Customer customer = new Customer();
+							customer.setId(rs.getLong("CUSTOMER_ID"));
+							customer.setName(rs.getString("NAME"));
+							customer.setLastName(rs.getString("LAST_NAME"));
+							return customer;
+						}
+					});
 
 		} catch (EmptyResultDataAccessException ex) {
 			// Cuando se usa queryForObject se espera al menos 1 resultado.
@@ -200,27 +198,23 @@ public class CustomerSpringJdbcDAO extends GenericSpringJdbcDAO<Customer, Long> 
 		}
 
 		// FIND USER OF CUSTOMER BY CUSTOMER_ID
-		sb.delete(0, sb.length());
-		sb = new StringBuilder();
-		sb.append("SELECT * FROM SPRING_DATA_USER_TBL WHERE FK_CUSTOMER_ID = :customerId");
+		parameterSource = new MapSqlParameterSource();
+		parameterSource.addValue("customerId", customer.getId());
 
-		paramParameters = new MapSqlParameterSource();
-		paramParameters.addValue("customerId", c.getId());
+		User user = this.namedJdbcTemplate.queryForObject(SELECT_USER_WHERE_CUSTOMER_ID, parameterSource,
+				(ResultSet rs, int rowNum) -> {
+					User u = new User();
+					u.setId(rs.getLong("USER_ID"));
+					u.setUsername(rs.getString("USERNAME"));
+					u.setPassword(rs.getString("PASSWORD"));
+					return u;
 
-		c.setUser(
-				this.namedJdbcTemplate.queryForObject(sb.toString(), paramParameters, (ResultSet rs, int rowNum) -> {
-					User user = new User();
-					user.setId(rs.getLong("USER_ID"));
-					user.setUsername(rs.getString("USERNAME"));
-					user.setPassword(rs.getString("PASSWORD"));
-					System.out.println(user);
-					return user;
+				});
 
-				}));
+		customer.setUser(user);
+		user.setCustomer(customer);
 
-		c.getUser().setCustomer(c);
-
-		return c;
+		return customer;
 	}
 
 	@Override
@@ -235,21 +229,13 @@ public class CustomerSpringJdbcDAO extends GenericSpringJdbcDAO<Customer, Long> 
 			return entity;
 
 		// DELETE COMPLETE RELATIONS OF CUSTOMER WITH ALL TABLES
-		final String DELETE_ACCOUNT_TABLE = "DELETE FROM SPRING_DATA_ACCOUNT_TBL WHERE FK_CUSTOMER_ID = :customerId";
-		final String DELETE_USER_TABLE = "DELETE FROM SPRING_DATA_USER_TBL WHERE USER_ID = :userId";
-		final String DELETE_CUSTOMER_TABLE = "DELETE FROM SPRING_DATA_CUSTOMER_TBL WHERE CUSTOMER_ID = :customerId";
+		Map<String, Object> mapParameters = new HashMap<>();
+		mapParameters.put("customerId", entity.getId());
+		mapParameters.put("userId", entity.getUser().getId());
 
-		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("customerId", entity.getId());
-		this.namedJdbcTemplate.update(DELETE_ACCOUNT_TABLE, paramMap);
-
-		paramMap = new HashMap<>();
-		paramMap.put("userId", entity.getUser().getId());
-		this.namedJdbcTemplate.update(DELETE_USER_TABLE, paramMap);
-
-		paramMap = new HashMap<>();
-		paramMap.put("customerId", entity.getId());
-		this.namedJdbcTemplate.update(DELETE_CUSTOMER_TABLE, paramMap);
+		this.namedJdbcTemplate.update(DELETE_ACCOUNT_TABLE_WHERE_CUSTOMER_ID, mapParameters);
+		this.namedJdbcTemplate.update(DELETE_USER_WHERE_USER_ID, mapParameters);
+		this.namedJdbcTemplate.update(DELETE_CUSTOMER_WHERE_CUSTOMER_ID, mapParameters);
 
 		return entity;
 	}
@@ -257,31 +243,20 @@ public class CustomerSpringJdbcDAO extends GenericSpringJdbcDAO<Customer, Long> 
 	@Override
 	public List<Customer> findAll() {
 
-		List<Customer> customerList = null;
+		final List<Customer> customerList = new ArrayList<>();
 
 		// FIND COMPLETE ALL CUSTOMER (WITH USER)
-		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT * FROM ")
-				.append("SPRING_DATA_CUSTOMER_TBL INNER JOIN SPRING_DATA_USER_TBL ON CUSTOMER_ID=FK_CUSTOMER_ID");
+		this.namedJdbcTemplate.query(SELECT_ALL_CUSTOMER_USER, new RowCallbackHandler() {
 
-		List<CustomerUserBeanSqlParameterHolder> customerUser = this.jdbcTemplate.query(sb.toString(),
-				new BeanPropertyRowMapper<CustomerUserBeanSqlParameterHolder>(
-						CustomerUserBeanSqlParameterHolder.class));
+			private CustomerRowMapper customerRowMapper = new CustomerRowMapper();
 
-		customerList = customerUser.stream().map(cu -> {
+			private int i = 0;
 
-			Customer c = Customer.builder().id(cu.getCustomer_id()).name(cu.getName())
-					.lastName(cu.getLast_name()).build();
-
-			User u = User.builder().id(cu.getUser_id()).username(cu.getUsername())
-					.password(cu.getPassword()).build();
-
-			u.setCustomer(c);
-			c.setUser(u);
-
-			return c;
-
-		}).collect(Collectors.toList());
+			@Override
+			public void processRow(ResultSet rs) throws SQLException {
+				customerList.add(customerRowMapper.mapRow(rs, i++));
+			}
+		});
 
 		return customerList;
 	}

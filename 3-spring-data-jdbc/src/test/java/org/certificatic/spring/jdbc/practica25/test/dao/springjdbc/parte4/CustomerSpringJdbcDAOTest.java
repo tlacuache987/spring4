@@ -1,4 +1,6 @@
-package org.certificatic.spring.jdbc.practica25.test.dao.springjdbc;
+package org.certificatic.spring.jdbc.practica25.test.dao.springjdbc.parte4;
+
+import java.util.List;
 
 import org.certificatic.spring.jdbc.pratica25.dao.api.ICustomerDAO;
 import org.certificatic.spring.jdbc.pratica25.dao.api.IUserDAO;
@@ -20,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @ContextConfiguration(locations = "classpath:/spring/practica25/spring-jdbc-application-context.xml")
 // @Transactional
 // @Rollback(false)
-@ActiveProfiles("h2-in-memory")
+@ActiveProfiles("mysql")
 public class CustomerSpringJdbcDAOTest {
 
 	@Autowired
@@ -147,5 +149,13 @@ public class CustomerSpringJdbcDAOTest {
 		Assert.assertNull(user);
 
 		log.info("user : {} {}", user, System.identityHashCode(user));
+	}
+
+	@Test
+	public void findAllCustomerTest() {
+		log.info("findAllCustomerTest -------------------");
+
+		List<Customer> customers = customerDAO.findAll();
+		log.info("customers : {}", customers);
 	}
 }

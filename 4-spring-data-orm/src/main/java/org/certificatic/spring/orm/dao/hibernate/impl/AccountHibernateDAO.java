@@ -17,6 +17,7 @@ public class AccountHibernateDAO extends GenericHibernateDAO<Account, Long> impl
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Account> findByCustomerId(Long id) {
+
 		return (List<Account>) this.sessionFactory.getCurrentSession()
 				.createQuery("FROM " + this.persistentClass.getName() + " WHERE customer = " + id)
 				.list();

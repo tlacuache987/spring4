@@ -15,7 +15,7 @@
 		<li><a href="${site_url}customer/dashboard"
 			data-seccion="dashboard">Dashboard</a></li>
 		<li><a href="${site_url}customer/manage/accounts"
-			data-seccion="manageCustomers">Manage Accounts</a></li>
+			data-seccion="manageAccounts">Manage Accounts</a></li>
 
 		<li><a href="${site_url}logout" data-seccion="logout">Logout</a></li>
 

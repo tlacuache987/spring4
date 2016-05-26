@@ -9,7 +9,7 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
-	<context:component-scan base-package="org.certificatic.spring.jdbc.dao.springjdbc" />
+	<context:component-scan base-package="org.certificatic.spring.jdbc.pratica25.dao" />
 
 	<import
 		resource="classpath:/spring/practica25/datasource-application-context.xml" />

@@ -1,4 +1,6 @@
-package org.certificatic.spring.jdbc.practica25.test.dao.springjdbc;
+package org.certificatic.spring.jdbc.practica25.test.dao.springjdbc.parte2;
+
+import java.util.List;
 
 import org.certificatic.spring.jdbc.pratica25.dao.api.IAccountDAO;
 import org.certificatic.spring.jdbc.pratica25.dao.api.ICustomerDAO;
@@ -152,5 +154,13 @@ public class UserSpringJdbcDAOTest {
 		Assert.assertNull(customer);
 
 		log.info("customer : {} {}", customer, System.identityHashCode(customer));
+	}
+
+	@Test
+	public void findAllUserTest() {
+		log.info("findAllUserTest -------------------");
+
+		List<User> users = userDAO.findAll();
+		log.info("users : {}", users);
 	}
 }

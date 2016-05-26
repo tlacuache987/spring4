@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@SessionAttributes("userSession")
+@SessionAttributes({ "userSession", "logableUser" })
 public class LoginController {
 
 	@Autowired
@@ -54,6 +54,11 @@ public class LoginController {
 			log.info("loggeado {}", (Admin) logableUser);
 
 		model.addAttribute("userSession", user);
+
+		if (logableUser instanceof Customer)
+			model.addAttribute("logableUser", (Customer) logableUser);
+		else
+			model.addAttribute("logableUser", (Admin) logableUser);
 
 		if (logableUser instanceof Customer)
 			return "redirect:customer/welcome";
