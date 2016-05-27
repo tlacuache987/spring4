@@ -12,17 +12,8 @@
 	<context:component-scan
 		base-package="org.certificatic.spring.orm.dao.hibernate.impl,org.certificatic.spring.orm.hibernate.validation.api.impl" />
 
-	<!-- H2 In-memory database -->
 	<import
-		resource="classpath:/spring/datasources/test-datasource-application-context.xml" />
-
-	<!-- H2 local database -->
-	<!-- <import resource="classpath:/spring/datasources/h2-datasource-application-context.xml" 
-		/> -->
-
-	<!-- MySQL local database -->
-	<!-- <import resource="classpath:/spring/datasources/mysql-datasource-application-context.xml" 
-		/> -->
+		resource="classpath:/spring/practica27/datasource-application-context.xml" />
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
