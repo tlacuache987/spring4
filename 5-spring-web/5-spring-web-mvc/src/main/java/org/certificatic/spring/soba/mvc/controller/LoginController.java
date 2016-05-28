@@ -1,4 +1,4 @@
-package org.certificatic.spring.soba.mvc.controller.admin;
+package org.certificatic.spring.soba.mvc.controller;
 
 import java.util.Locale;
 

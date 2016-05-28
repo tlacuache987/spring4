@@ -49,7 +49,6 @@ public class Customer implements ILogableUser {
 	private String lastName;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	// , mappedBy = "customer"
 	@JoinColumn(name = "FK_USER_ID")
 	private User user;
 

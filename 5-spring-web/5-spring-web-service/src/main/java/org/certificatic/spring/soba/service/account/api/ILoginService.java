@@ -6,4 +6,6 @@ public interface ILoginService {
 
 	ILogableUser checkLoginUser(String username, String password);
 
+	boolean usernameExists(String username);
+
 }

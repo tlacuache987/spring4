@@ -9,8 +9,14 @@ public interface IAccountService {
 
 	Account getByAccountId(Long id);
 
+	Account getByAccountNumber(String accountNumber);
+
 	List<Account> getByCustomerId(Long id);
 
 	String transfer(Account origin, Account destination, BigDecimal amount, String description);
+
+	void create(Account account);
+
+	Account delete(Account account);
 
 }

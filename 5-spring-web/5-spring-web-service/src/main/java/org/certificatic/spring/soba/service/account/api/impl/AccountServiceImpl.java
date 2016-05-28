@@ -51,4 +51,22 @@ public class AccountServiceImpl implements IAccountService {
 		return "refNumber";
 	}
 
+	@Override
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRES_NEW)
+	public void create(Account account) {
+		this.accountDAO.insert(account);
+	}
+
+	@Override
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRES_NEW)
+	public Account delete(Account account) {
+		return this.accountDAO.delete(account.getId());
+	}
+
+	@Override
+	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
+	public Account getByAccountNumber(String accountNumber) {
+		return this.accountDAO.findByAccountNumber(accountNumber);
+	}
+
 }

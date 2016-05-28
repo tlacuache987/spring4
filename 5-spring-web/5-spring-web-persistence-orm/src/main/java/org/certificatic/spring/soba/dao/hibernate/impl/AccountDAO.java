@@ -21,4 +21,10 @@ public class AccountDAO extends GenericEntityDAO<Account, Long> implements IAcco
 				.list();
 	}
 
+	@Override
+	public Account findByAccountNumber(String accountNumber) {
+		return (Account) this.sessionFactory.getCurrentSession().createQuery("FROM " + this.persistentClass.getName() +
+				" WHERE accountNumber = " + accountNumber).uniqueResult();
+	}
+
 }

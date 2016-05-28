@@ -7,14 +7,21 @@ import javax.servlet.http.HttpSession;
 
 import org.certificatic.spring.soba.domain.Account;
 import org.certificatic.spring.soba.domain.Customer;
+import org.certificatic.spring.soba.domain.vo.CustomDate;
+import org.certificatic.spring.soba.mvc.validator.CreateAccountFormValidator;
 import org.certificatic.spring.soba.service.account.api.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +30,18 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @SessionAttributes({ "userSession", "logableUser" })
 @RequestMapping(value = "/customer/manage/accounts")
-public class AccountManagementController {
+public class AccountManagementCustomerController {
 
 	@Autowired
 	private IAccountService accountService;
+
+	@Autowired
+	private CreateAccountFormValidator createAccountFormValidator;
+
+	@InitBinder(value = "createAccountForm")
+	protected void initBinderCreateAccountForm(WebDataBinder binder) {
+		binder.setValidator(createAccountFormValidator);
+	}
 
 	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET)
 	public String showManagementAccountsPage(HttpSession session, Model model,
@@ -62,6 +77,41 @@ public class AccountManagementController {
 		return "customer/manage/accounts/view";
 	}
 
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public String showCreateAccountPage(HttpSession session, Model model,
+			@ModelAttribute("logableUser") Customer customer) {
+
+		model.addAttribute("createAccountForm", new Account());
+
+		model.addAttribute("currentSecc", "manageAccounts");
+
+		return "customer/manage/accounts/create";
+	}
+
+	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
+	public String createAccount(HttpSession session, Model model,
+			@ModelAttribute("logableUser") Customer customer,
+			@Validated @ModelAttribute("createAccountForm") Account createAccountForm, BindingResult result) {
+
+		if (result.hasErrors()) {
+
+			model.addAttribute("currentSecc", "manageAccounts");
+
+			return "customer/manage/accounts/create";
+		}
+
+		createAccountForm.setCustomer(customer);
+		createAccountForm.setCreatedDate(new CustomDate());
+
+		log.info("createAccountForm: {}", createAccountForm);
+
+		accountService.create(createAccountForm);
+
+		model.addAttribute("currentSecc", "manageAccounts");
+
+		return "redirect:/customer/manage/accounts";
+	}
+
 	@RequestMapping(value = "/transfer/{accountId}", method = RequestMethod.GET)
 	public String showViewTransferAccountPage(HttpSession session, Model model,
 			@ModelAttribute("logableUser") Customer customer, @PathVariable Integer accountId) {
@@ -79,5 +129,18 @@ public class AccountManagementController {
 		model.addAttribute("currentSecc", "manageAccounts");
 
 		return "customer/manage/accounts/transfer";
+	}
+
+	@RequestMapping(value = "/delete/{accountId}", method = RequestMethod.DELETE)
+	public @ResponseBody String deleteAccount(HttpSession session, Model model,
+			@ModelAttribute("logableUser") Customer customer, @PathVariable Long accountId) {
+
+		log.info("delete account id: {}", accountId);
+
+		accountService.delete(Account.builder().id(accountId).build());
+
+		model.addAttribute("currentSecc", "manageAccounts");
+
+		return "lol";
 	}
 }

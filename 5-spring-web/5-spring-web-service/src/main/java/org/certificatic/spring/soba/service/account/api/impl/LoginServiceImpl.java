@@ -2,6 +2,7 @@ package org.certificatic.spring.soba.service.account.api.impl;
 
 import org.certificatic.spring.soba.dao.api.IAdminDAO;
 import org.certificatic.spring.soba.dao.api.ICustomerDAO;
+import org.certificatic.spring.soba.dao.api.IUserDAO;
 import org.certificatic.spring.soba.domain.Admin;
 import org.certificatic.spring.soba.domain.Customer;
 import org.certificatic.spring.soba.domain.ILogableUser;
@@ -19,6 +20,9 @@ public class LoginServiceImpl implements ILoginService {
 
 	@Autowired
 	private IAdminDAO adminDAO;
+
+	@Autowired
+	private IUserDAO userDAO;
 
 	@Override
 	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
@@ -54,6 +58,12 @@ public class LoginServiceImpl implements ILoginService {
 			return admin;
 
 		return null;
+	}
+
+	@Override
+	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
+	public boolean usernameExists(String username) {
+		return this.userDAO.findByUsername(username) != null ? true : false;
 	}
 
 	/*@Override

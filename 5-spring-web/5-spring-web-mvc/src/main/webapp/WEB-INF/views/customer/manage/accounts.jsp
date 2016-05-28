@@ -6,62 +6,32 @@
 	pageEncoding="UTF-8"%>
 
 <script>
-	$(document)
-			.ready(
-					function(event) {
-						$("a[data-accion=eliminarUsuario]")
-								.on(
-										"click",
-										function(event) {
-											event.preventDefault();
+  $(document).ready(function(event) {
+    $("a[data-accion=deleteAccount]").on("click", function(event) {
+      event.preventDefault();
 
-											var $this = $(this);
-											var tr = $this.parent().parent();
+      var $this = $(this);
+      var tr = $this.parent().parent();
 
-											var id = tr.find("td:first").text();
-											var nombre = tr.find("td:eq(1) a")
-													.text();
+      var id = tr.find("td:first").text();
+      var number = tr.find("td:eq(1) a").text();
 
-											if (confirm("¿Seguro que desea eliminar el usuario Id: "
-													+ id
-													+ ", Nombre: "
-													+ nombre + "?")) {
-												setTimeout(
-														function() {
-															util
-																	.doAjax(
-																			$this
-																					.attr('data-urlAccion'),
-																			'DELETE',
-																			{},
-																			function(
-																					r) {
+      if (confirm("¿Do you want delete account number: " + number + "?")) {
+        setTimeout(function() {
+          util.doAjax($this.attr('data-urlAccion'), 'DELETE', {}, function(r) {
 
-																				util
-																						.showCommandMensaje(
-																								r.response.mensaje,
-																								true,
-																								function(
-																										$scmc) {
-																									tr
-																											.remove();
-																								});
-																			},
-																			function() {
-
-																				util
-																						.showCommandMensaje(
-																								"No fué posible ejecutar esta acción en este momento",
-																								true,
-																								function() {
-																									console
-																											.log('error =(');
-																								});
-																			});
-														}, 200);
-											}
-										});
-					});
+            util.showCommandMensaje(r.response.mensaje, true, function($scmc) {
+              tr.remove();
+            });
+          }, function() {
+            util.showCommandMensaje("No fué posible ejecutar esta acción en este momento", true, function() {
+              console.log('error =(');
+            });
+          });
+        }, 200);
+      }
+    });
+  });
 </script>
 
 <div id="command-mensaje" class="error">
@@ -110,26 +80,19 @@
 					<td><a href="#">${account.accountNumber}</a></td>
 					<td>${account.createdDate}</td>
 					<td>${balance}</td>
-					<td align="center">
-						<c:set var="urlPermiso" value="user" />
-							
-							<a
-								href="${site_url}customer/manage/accounts/view/${account.id}">
-								<img src="resources/img/icons/account.gif"
-								title="View Account Detail" width="16" height="16" />
-							</a>
-							&nbsp;&nbsp;&nbsp;
-							<a
-								href="${site_url}customer/manage/accounts/transfer/${account.id}">
-								<img src="resources/img/icons/user_edit.png"
-								title="Transfer" width="16" height="16" />
-							</a>
-							&nbsp;&nbsp;&nbsp;
-							<a href="##" data-accion="eliminarUsuario"
-								data-urlAccion="${urlPermiso}/administrarUsuarios/eliminarUsuario/${account.id}">
-								<img src="resources/img/icons/user_delete.png"
-								title="Eliminar Usuario" width="16" height="16" />
-							</a></td>
+					<td align="center"><c:set var="urlPermiso" value="user" /> <a
+						href="${site_url}customer/manage/accounts/view/${account.id}">
+							<img src="resources/img/icons/account.gif"
+							title="View Account Detail" width="16" height="16" />
+					</a> &nbsp;&nbsp;&nbsp; <a
+						href="${site_url}customer/manage/accounts/transfer/${account.id}">
+							<img src="resources/img/icons/user_edit.png"
+							title="Transfer Money" width="16" height="16" />
+					</a> &nbsp;&nbsp;&nbsp; <a href="##" data-accion="deleteAccount"
+						data-urlAccion="${site_url}customer/manage/accounts/delete/${account.id}">
+							<img src="resources/img/icons/user_delete.png"
+							title="Delete Account" width="16" height="16" />
+					</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
