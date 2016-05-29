@@ -16,7 +16,7 @@
 		<li><a href="${site_url}admin/manage/customers"
 			data-seccion="manageCustomers">Manage Customers</a></li>
 		<li><a href="${site_url}admin/manage/users"
-			data-seccion="manageUsers">Manage Users</a></li>
+			data-seccion="manageUsers">Manage Administrative Users</a></li>
 
 
 		<li><a href="${site_url}logout" data-seccion="logout">Logout</a></li>

@@ -47,9 +47,13 @@
 	<definition name="admin/manage/customers/view" extends="admin.definition">
 		<put-attribute name="content" value="/WEB-INF/views/admin/manageCustomers/viewCustomer.jsp"></put-attribute>
 	</definition>
-	
+
 	<definition name="admin/manage/customers/create" extends="admin.definition">
 		<put-attribute name="content" value="/WEB-INF/views/admin/manageCustomers/createCustomer.jsp"></put-attribute>
+	</definition>
+
+	<definition name="admin/manage/customers/edit" extends="admin.definition">
+		<put-attribute name="content" value="/WEB-INF/views/admin/manageCustomers/editCustomer.jsp"></put-attribute>
 	</definition>
 
 	<definition name="error404" extends="error.404.definition" />

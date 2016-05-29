@@ -15,13 +15,13 @@
 <form:form id="form" action="login" method="post" commandName="command">
 	<fieldset id="personal">
 		<legend>Login</legend>
-		<label for="username">Usuario:</label> <input id="username"
-			name="username" type="text" /> <br /> <label for="password">Contraseña</label>
+		<label for="username">Username:</label> <input id="username"
+			name="username" type="text" /> <br /> <label for="password">Password:</label>
 		<input id="password" name="password" type="password" /> <br /> <br />
 	</fieldset>
 
 	<div align="center">
-		<input class="button" type="reset" value="Limpiar" /> <input
-			class="button" type="submit" value="Entrar" />
+		<input class="button" type="reset" value="Clear" /> <input
+			class="button" type="submit" value="Login" />
 	</div>
 </form:form>
