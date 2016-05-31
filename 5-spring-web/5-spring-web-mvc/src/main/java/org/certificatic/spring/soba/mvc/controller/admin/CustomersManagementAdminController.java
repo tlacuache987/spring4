@@ -210,15 +210,22 @@ public class CustomersManagementAdminController {
 	}
 
 	@RequestMapping(value = "/delete/{customerId}", method = RequestMethod.DELETE)
-	public @ResponseBody String deleteAccount(HttpSession session, Model model,
+	public @ResponseBody Map<String, Object> deleteAccount(HttpSession session, Model model,
 			@ModelAttribute("logableUser") Admin admin, @PathVariable Long customerId) {
 
 		log.info("delete customer id: {}", customerId);
 
-		customerService.delete(Customer.builder().id(customerId).build());
+		// customerService.delete(Customer.builder().id(customerId).build());
 
 		model.addAttribute("currentSecc", "manageCustomers");
 
-		return "lol";
+		// throw new RuntimeException("Error trying delete customer id: " +
+		// customerId);
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("message", "Customer id: " + customerId + " deleted.");
+		map.put("status", true);
+
+		return map;
 	}
 }

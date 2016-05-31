@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
 
 	<context:component-scan
-		base-package="org.certificatic.spring.soba.mvc,org.certificatic.spring.soba.aspect.web.security,org.certificatic.spring.soba.mvc.validator" />
+		base-package="org.certificatic.spring.soba.mvc,org.certificatic.spring.soba.aspect.web,org.certificatic.spring.soba.mvc.validator" />
 
 	<aop:aspectj-autoproxy />
 

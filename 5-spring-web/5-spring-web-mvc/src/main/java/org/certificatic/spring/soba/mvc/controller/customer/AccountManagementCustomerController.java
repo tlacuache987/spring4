@@ -1,15 +1,19 @@
 package org.certificatic.spring.soba.mvc.controller.customer;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
 import org.certificatic.spring.soba.domain.Account;
 import org.certificatic.spring.soba.domain.Customer;
+import org.certificatic.spring.soba.domain.Movement;
 import org.certificatic.spring.soba.domain.vo.CustomDate;
 import org.certificatic.spring.soba.mvc.validator.CreateAccountFormValidator;
 import org.certificatic.spring.soba.service.account.api.IAccountService;
+import org.certificatic.spring.soba.service.account.api.IMovementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +40,9 @@ public class AccountManagementCustomerController {
 	private IAccountService accountService;
 
 	@Autowired
+	private IMovementService movementService;
+
+	@Autowired
 	private CreateAccountFormValidator createAccountFormValidator;
 
 	@InitBinder(value = "createAccountForm")
@@ -60,17 +67,20 @@ public class AccountManagementCustomerController {
 
 	@RequestMapping(value = "/view/{accountId}", method = RequestMethod.GET)
 	public String showViewAccountPage(HttpSession session, Model model,
-			@ModelAttribute("logableUser") Customer customer, @PathVariable Integer accountId) {
+			@ModelAttribute("logableUser") Customer customer, @PathVariable Long accountId) {
 
 		List<Account> accounts = accountService.getByCustomerId(customer.getId());
 
-		Optional<Account> optionalAccount = accounts.stream().filter((a) -> a.getId().equals(new Long(accountId)))
+		Optional<Account> optionalAccount = accounts.stream().filter((a) -> a.getId().equals(accountId))
 				.findAny();
 
 		if (!optionalAccount.isPresent())
 			return "rediect:/customer/manage/accounts";
 
+		List<Movement> movements = movementService.getByAccountId(accountId);
+
 		model.addAttribute("account", optionalAccount.get());
+		model.addAttribute("movements", movements);
 
 		model.addAttribute("currentSecc", "manageAccounts");
 
@@ -132,15 +142,22 @@ public class AccountManagementCustomerController {
 	}
 
 	@RequestMapping(value = "/delete/{accountId}", method = RequestMethod.DELETE)
-	public @ResponseBody String deleteAccount(HttpSession session, Model model,
+	public @ResponseBody Map<String, Object> deleteAccount(HttpSession session, Model model,
 			@ModelAttribute("logableUser") Customer customer, @PathVariable Long accountId) {
 
 		log.info("delete account id: {}", accountId);
 
-		accountService.delete(Account.builder().id(accountId).build());
+		// accountService.delete(Account.builder().id(accountId).build());
 
 		model.addAttribute("currentSecc", "manageAccounts");
 
-		return "lol";
+		// throw new RuntimeException("Error trying delete account id: " +
+		// accountId);
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("message", "Account id: " + accountId + " deleted.");
+		map.put("status", true);
+
+		return map;
 	}
 }

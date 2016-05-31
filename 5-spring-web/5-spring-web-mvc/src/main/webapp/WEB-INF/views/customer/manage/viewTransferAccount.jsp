@@ -6,9 +6,9 @@
 	pageEncoding="UTF-8"%>
 
 <div id="box">
-	<h3 id="adduser">Manage Accounts</h3>
+	<h3 id="manageAccount">Manage Accounts</h3>
 	<form>
-		<fieldset id="personal">
+		<fieldset id="accountDetail">
 			<legend>Account Detail</legend>
 			<label for="id">ID: </label>
 			<c:out value="${account.id}" />

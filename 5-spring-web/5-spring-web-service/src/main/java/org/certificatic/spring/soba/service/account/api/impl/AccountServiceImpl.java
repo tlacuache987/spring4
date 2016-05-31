@@ -48,7 +48,7 @@ public class AccountServiceImpl implements IAccountService {
 
 		accountDAO.update(origin);
 
-		return "refNumber";
+		return generateRandomReferenceNumber(12);
 	}
 
 	@Override

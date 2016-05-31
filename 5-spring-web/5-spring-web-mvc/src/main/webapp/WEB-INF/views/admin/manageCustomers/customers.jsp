@@ -15,20 +15,37 @@
       var id = tr.find("td:first").text();
       var number = tr.find("td:eq(1) a").text();
 
-      if (confirm("¿Do you want delete customer: " + number + "?")) {
+      swal({
+        title: "¿Do you want delete customer: " + number + "?",
+        text: "You will not be able to recover this customer and theirs accounts!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: true
+      }, function() {
         setTimeout(function() {
           util.doAjax($this.attr('data-urlAccion'), 'DELETE', {}, function(r) {
 
-            util.showCommandMensaje(r.response.mensaje, true, function($scmc) {
+            util.showCommandMensaje(r.message, true, function($scmc) {
               tr.remove();
             });
-          }, function() {
-            util.showCommandMensaje("No fué posible ejecutar esta acción en este momento", true, function() {
-              console.log('error =(');
+
+            swal("Deleted!", r.message, "success");
+
+          }, function(r) {
+
+            util.showCommandMensaje(r.message, true, function() {
+              console.log(r.message);
             });
+
+            swal("Error!", r.message, "error");
+
           });
         }, 200);
-      }
+
+      });
+
     });
   });
 </script>
@@ -44,10 +61,8 @@
 	<h3>
 		<span style="display: inline-block; text-align: left; width: 49%;"> Manage Customers </span>
 		<span style="display: inline-block; text-align: right; width: 50%;">
-			<a href="${site_url}admin/manage/customers/create">
-				<span style="font-size: 12px;">Create New Customer</span>
-				<img width="16" height="16" src="${site_url}resources/img/icons/user_add.png"
-					title="Create New Customer" />
+			<a href="${site_url}admin/manage/customers/create"> <span style="font-size: 12px;">Create New Customer</span> <img
+					width="16" height="16" src="${site_url}resources/img/icons/user_add.png" title="Create New Customer" />
 			</a>
 		</span>
 	</h3>
@@ -55,9 +70,7 @@
 		<thead>
 			<tr>
 				<th width="40px">
-					<a href="#">
-						ID
-						<img src="${site_url}resources/img/icons/arrow_down_mini.gif" width="16" height="16"
+					<a href="#"> ID <img src="${site_url}resources/img/icons/arrow_down_mini.gif" width="16" height="16"
 							align="middle" />
 					</a>
 				</th>
@@ -89,18 +102,13 @@
 					<td>${customer.user.username}</td>
 					<td align="center">
 						<c:set var="urlPermiso" value="user" />
-						<a href="${site_url}admin/manage/customers/view/${customer.id}">
-							<img src="resources/img/icons/account.gif" title="View Customer Detail" width="16"
-								height="16" />
-						</a>
-						&nbsp;&nbsp;&nbsp;
-						<a href="${site_url}admin/manage/customers/edit/${customer.id}">
-							<img src="resources/img/icons/user_edit.png" title="Edit Customer" width="16" height="16" />
-						</a>
-						&nbsp;&nbsp;&nbsp;
-						<a href="##" data-accion="deleteCustomer"
-							data-urlAccion="${site_url}admin/manage/customers/delete/${customer.id}">
-							<img src="resources/img/icons/user_delete.png" title="Delete Customer" width="16" height="16" />
+						<a href="${site_url}admin/manage/customers/view/${customer.id}"> <img src="resources/img/icons/account.gif"
+								title="View Customer Detail" width="16" height="16" />
+						</a> &nbsp;&nbsp;&nbsp; <a href="${site_url}admin/manage/customers/edit/${customer.id}"> <img
+								src="resources/img/icons/user_edit.png" title="Edit Customer" width="16" height="16" />
+						</a> &nbsp;&nbsp;&nbsp; <a href="##" data-accion="deleteCustomer"
+							data-urlAccion="${site_url}admin/manage/customers/delete/${customer.id}"> <img
+								src="resources/img/icons/user_delete.png" title="Delete Customer" width="16" height="16" />
 						</a>
 					</td>
 				</tr>
@@ -108,24 +116,18 @@
 		</tbody>
 	</table>
 	<div id="pager">
-		Página
-		<a href="#">
-			<img src="resources/img/icons/arrow_left.gif" width="16" height="16" />
+		Página <a href="#"> <img src="resources/img/icons/arrow_left.gif" width="16" height="16" />
 		</a>
 		<input size="1" value="1" type="text" name="page" id="page" />
-		<a href="#">
-			<img src="resources/img/icons/arrow_right.gif" width="16" height="16" />
-		</a>
-		de 50 páginas | Viendo
+		<a href="#"> <img src="resources/img/icons/arrow_right.gif" width="16" height="16" />
+		</a> de 50 páginas | Viendo
 		<select name="view">
 			<option>10</option>
 			<option>20</option>
 			<option>50</option>
 			<option>100</option>
 		</select>
-		registros por página | Total
-		<strong>420</strong>
-		registros encontrados.
+		registros por página | Total <strong>420</strong> registros encontrados.
 	</div>
 </div>
 <br />
