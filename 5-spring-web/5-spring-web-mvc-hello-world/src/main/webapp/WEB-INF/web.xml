@@ -22,13 +22,13 @@
 	</servlet-mapping>
 
 	<!-- RootApplicationContext contextConfigLocation -->
-	<context-param>
+	<!-- context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-application-context.xml</param-value>
-	</context-param>
+	</context-param -->
 	<!-- RootApplicationContext ContextLoaderListener -->
-	<listener>
+	<!-- listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+	</listener -->
 
 </web-app>

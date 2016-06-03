@@ -1,6 +1,6 @@
-package org.certificatic.spring.web.mvc.controller;
+package org.certificatic.spring.mvc.practica28.controller;
 
-import org.certificatic.spring.web.core.BeanComponent;
+import org.certificatic.spring.mvc.practica28.rootbeans.BeanComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 class IndexController {
 
-	@Autowired
+	@Autowired(required = false)
 	private BeanComponent beanComponent;
 
 	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET)

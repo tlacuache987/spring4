@@ -15,6 +15,7 @@ import org.certificatic.spring.soba.mvc.validator.CreateAccountFormValidator;
 import org.certificatic.spring.soba.service.account.api.IAccountService;
 import org.certificatic.spring.soba.service.account.api.IMovementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -103,10 +104,9 @@ public class AccountManagementCustomerController {
 			@ModelAttribute("logableUser") Customer customer,
 			@Validated @ModelAttribute("createAccountForm") Account createAccountForm, BindingResult result) {
 
+		model.addAttribute("currentSecc", "manageAccounts");
+
 		if (result.hasErrors()) {
-
-			model.addAttribute("currentSecc", "manageAccounts");
-
 			return "customer/manage/accounts/create";
 		}
 
@@ -115,7 +115,13 @@ public class AccountManagementCustomerController {
 
 		log.info("createAccountForm: {}", createAccountForm);
 
-		accountService.create(createAccountForm);
+		try {
+			accountService.create(createAccountForm);
+		} catch (DataAccessException dae) {
+			model.addAttribute("serviceError", dae.getRootCause().getLocalizedMessage());
+
+			return "customer/manage/accounts/create";
+		}
 
 		model.addAttribute("currentSecc", "manageAccounts");
 

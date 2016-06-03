@@ -41,9 +41,9 @@ util = {
       hideCommandMensaje = false;
     }
 
-    $("#command-mensaje").hide().text(mensaje).show('fast', function() {
+    $("#command-mensaje").hide().html(mensaje).show('fast', function() {
       var $this = $(this);
-
+            
       if (hideCommandMensaje) {
         setTimeout(function() {
           $this.hide('fast', function() {

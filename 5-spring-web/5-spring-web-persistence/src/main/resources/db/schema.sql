@@ -31,7 +31,7 @@ create table ADMIN_TBL(
 create table ACCOUNT_TBL(
 	ACCOUNT_ID integer auto_increment primary key,
 	FK_CUSTOMER_ID integer not null,
-	ACCOUNT_NUMBER varchar(16) not null,
+	ACCOUNT_NUMBER varchar(16) unique not null,
 	CREATED_DATE timestamp not null,
 	BALANCE decimal(20,4) not null
 );

@@ -24,6 +24,7 @@ public class CreateAccountFormValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Account account = (Account) target;
 
+		System.out.println("lol: " + account.getAccountNumber());
 		if (account.getAccountNumber().trim().length() != 14) {
 			errors.rejectValue("accountNumber", "", "Length must be equal to 14 digits.");
 		} else {

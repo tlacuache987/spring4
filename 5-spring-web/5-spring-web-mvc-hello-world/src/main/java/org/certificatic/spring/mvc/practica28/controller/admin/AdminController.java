@@ -1,6 +1,6 @@
-package org.certificatic.spring.web.mvc.admin.controller;
+package org.certificatic.spring.mvc.practica28.controller.admin;
 
-import org.certificatic.spring.web.core.BeanComponent;
+import org.certificatic.spring.mvc.practica28.rootbeans.BeanComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/admin")
-class IndexAdminController {
+class AdminController {
 
-	@Autowired
+	@Autowired(required = false)
 	private BeanComponent beanComponent;
 
 	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET)
 	public String showIndexPage(Model model) {
 
 		model.addAttribute("message", "Hello World (ADMIN) - Spring MVC (" + beanComponent.sayHello("Ivan") + ")");
-		return "index";
+		return "admin";
 	}
 
 	@RequestMapping(value = "/message", method = RequestMethod.GET)
