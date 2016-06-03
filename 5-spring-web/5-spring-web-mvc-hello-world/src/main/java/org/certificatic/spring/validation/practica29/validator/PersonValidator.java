@@ -19,7 +19,7 @@ public class PersonValidator implements Validator {
 
 		Person person = (Person) target;
 
-		if (person.getAge() == null || person.getAge() < 18) {
+		if (person.getAge() != null && person.getAge() < 18) {
 			errors.rejectValue("age", "person.age.gt18.required", new Object[] { 18 },
 					"Age must be greather or equal than 18.");
 		}
