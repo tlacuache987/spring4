@@ -12,6 +12,7 @@ local.properties
 .recommenders
 
 */target/
+**/target/
 
 # Eclipse Core
 .project
