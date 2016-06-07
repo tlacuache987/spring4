@@ -1,6 +1,6 @@
 package org.certificatic.spring.web.mvc.controller;
 
-import org.certificatic.spring.web.core.BeanComponent;
+import org.certificatic.spring.rootbeans.BeanComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

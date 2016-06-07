@@ -1,6 +1,6 @@
 package org.certificatic.spring.web.mvc.service;
 
-import org.certificatic.spring.web.core.BeanComponent;
+import org.certificatic.spring.rootbeans.BeanComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Component
 @Data
-public class WebService {
+public class AddService {
 
 	@Autowired
 	private BeanComponent beanComponent;

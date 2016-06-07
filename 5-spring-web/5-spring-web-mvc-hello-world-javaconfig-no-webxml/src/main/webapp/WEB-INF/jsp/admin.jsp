@@ -6,7 +6,7 @@
 <title>Hola Mundo - Spring MVC</title>
 </head>
 <body>
-	<h1>Index</h1>
+	<h1>Admin</h1>
 	<h2>Hi ${message}</h2>
 </body>
 </html>

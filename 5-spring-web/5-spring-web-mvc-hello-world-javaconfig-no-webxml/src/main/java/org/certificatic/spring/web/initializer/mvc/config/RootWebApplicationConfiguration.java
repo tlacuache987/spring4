@@ -4,7 +4,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan("org.certificatic.spring.web.core")
+@ComponentScan("org.certificatic.spring.rootbeans")
 public class RootWebApplicationConfiguration {
 
 }
