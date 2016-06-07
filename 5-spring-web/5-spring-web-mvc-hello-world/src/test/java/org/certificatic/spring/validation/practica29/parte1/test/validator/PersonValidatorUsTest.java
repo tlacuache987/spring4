@@ -1,10 +1,10 @@
-package org.certificatic.spring.validation.practica29.test.validator;
+package org.certificatic.spring.validation.practica29.parte1.test.validator;
 
 import java.util.Locale;
 
-import org.certificatic.spring.validation.practica29.domain.Person;
-import org.certificatic.spring.validation.practica29.test.validator.utils.PersonValidatorUsTestUtils;
-import org.certificatic.spring.validation.practica29.validator.config.ValidatorTestConfig;
+import org.certificatic.spring.validation.practica29.parte1.domain.Person;
+import org.certificatic.spring.validation.practica29.parte1.test.validator.utils.PersonValidatorUsTestUtils;
+import org.certificatic.spring.validation.practica29.parte1.validator.config.ValidatorTestConfig;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

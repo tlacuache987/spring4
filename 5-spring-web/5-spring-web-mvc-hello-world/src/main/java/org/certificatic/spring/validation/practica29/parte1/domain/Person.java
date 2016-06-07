@@ -1,4 +1,4 @@
-package org.certificatic.spring.validation.practica29.domain;
+package org.certificatic.spring.validation.practica29.parte1.domain;
 
 import lombok.Data;
 

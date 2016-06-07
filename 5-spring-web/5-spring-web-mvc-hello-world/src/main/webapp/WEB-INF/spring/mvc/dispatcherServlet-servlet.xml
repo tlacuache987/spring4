@@ -5,7 +5,12 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:component-scan base-package="org.certificatic.spring.mvc.practica28" />
+
+	<context:component-scan base-package="org.certificatic.spring.mvc.practica28">
+		<context:exclude-filter type="regex" expression="org.certificatic.spring.mvc.practica28.rootbeans.*" />
+	</context:component-scan>
+
+	<bean class="org.certificatic.spring.mvc.practica29.parte2.config.ContactFormValidationConfig" />
 
 	<mvc:annotation-driven />
 

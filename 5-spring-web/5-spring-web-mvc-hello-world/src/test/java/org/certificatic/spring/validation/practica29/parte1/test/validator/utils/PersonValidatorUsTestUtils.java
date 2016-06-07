@@ -1,4 +1,4 @@
-package org.certificatic.spring.validation.practica29.test.validator.utils;
+package org.certificatic.spring.validation.practica29.parte1.test.validator.utils;
 
 import java.util.Locale;
 
@@ -11,7 +11,7 @@ import org.springframework.validation.ObjectError;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class PersonValidatorMxTestUtils {
+public class PersonValidatorUsTestUtils {
 
 	public static void printErrors(BindException errors, MessageSource messageSource, Locale mxLocale) {
 
@@ -28,11 +28,11 @@ public class PersonValidatorMxTestUtils {
 			} else if (fieldError.getField().equals("age")) {
 
 				if (fieldError.getRejectedValue() != null && ((Integer) fieldError.getRejectedValue()) < 18)
-					Assert.assertEquals("Edad necesita ser mayor o igual a 18 para el objeto Persona.", messageSource
+					Assert.assertEquals("Age need to be greather or equal than 18 for object Person.", messageSource
 							.getMessage(error,
 									mxLocale));
 				else
-					Assert.assertEquals("Edad es requerido para el objeto Persona.", messageSource.getMessage(error,
+					Assert.assertEquals("Age must is required for object Person.", messageSource.getMessage(error,
 							mxLocale));
 			}
 
