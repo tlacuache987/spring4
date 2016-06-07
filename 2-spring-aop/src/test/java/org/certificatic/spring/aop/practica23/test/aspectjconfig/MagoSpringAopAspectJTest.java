@@ -4,6 +4,7 @@ import org.certificatic.spring.aop.practica23.aspectjconfig.SpringAspectJAopConf
 import org.certificatic.spring.aop.practica23.aspectjconfig.bean.api.IVoluntario;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,7 @@ public class MagoSpringAopAspectJTest {
 	}
 
 	@Test
+	@Ignore
 	public void magoSpringAopAspectJWithJokeTest2() {
 
 		log.info("magoSpringAopAspectJWithJokeTest -------------------");
