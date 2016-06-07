@@ -28,7 +28,7 @@ public class PersonValidatorUsTestUtils {
 			} else if (fieldError.getField().equals("age")) {
 
 				if (fieldError.getRejectedValue() != null && ((Integer) fieldError.getRejectedValue()) < 18)
-					Assert.assertEquals("Age need to be greather or equal than 18 for object Person.", messageSource
+					Assert.assertEquals("Age need to be greater or equal than 18 for object Person.", messageSource
 							.getMessage(error,
 									mxLocale));
 				else
