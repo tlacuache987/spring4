@@ -1,8 +1,8 @@
-package org.certificatic.spring.mvc.practica29.parte2.validator;
+package org.certificatic.spring.mvc.practica30.parte2.validator;
 
 import java.util.List;
 
-import org.certificatic.spring.mvc.practica29.parte2.forms.ContactForm;
+import org.certificatic.spring.mvc.practica30.parte2.forms.ContactForm;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;

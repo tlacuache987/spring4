@@ -1,4 +1,4 @@
-package org.certificatic.spring.mvc.practica29.parte2.controller;
+package org.certificatic.spring.mvc.practica30.parte2.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.Random;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.certificatic.spring.mvc.practica29.parte2.forms.ContactForm;
+import org.certificatic.spring.mvc.practica30.parte2.forms.ContactForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

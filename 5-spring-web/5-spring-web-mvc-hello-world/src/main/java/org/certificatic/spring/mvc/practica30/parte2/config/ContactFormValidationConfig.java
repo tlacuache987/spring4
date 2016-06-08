@@ -1,6 +1,6 @@
-package org.certificatic.spring.mvc.practica29.parte2.config;
+package org.certificatic.spring.mvc.practica30.parte2.config;
 
-import org.certificatic.spring.mvc.practica29.parte2.validator.ContactFormValidator;
+import org.certificatic.spring.mvc.practica30.parte2.validator.ContactFormValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

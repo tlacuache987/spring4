@@ -1,6 +1,6 @@
-package org.certificatic.spring.validation.practica29.parte1.validator;
+package org.certificatic.spring.validation.practica30.parte1.validator;
 
-import org.certificatic.spring.validation.practica29.parte1.domain.Person;
+import org.certificatic.spring.validation.practica30.parte1.domain.Person;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
