@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/contact")
-@SessionAttributes({ "formData", "confirmationId" })
+@SessionAttributes({ "contactForm", "confirmationId" })
 public class ContactFormController {
 
 	@Resource
@@ -59,7 +59,7 @@ public class ContactFormController {
 
 		String confirmationId = randomNumber(10);
 		model.addAttribute("confirmationId", confirmationId);
-		model.addAttribute("formData", form);
+		model.addAttribute("contactForm", form);
 
 		log.info("confirmation id: {}", confirmationId);
 
@@ -68,37 +68,38 @@ public class ContactFormController {
 	}
 
 	@RequestMapping(value = "/success", method = RequestMethod.GET)
-	public String successProcess(@ModelAttribute("formData") ContactForm form) {
+	public String successProcess(@ModelAttribute("contactForm") ContactForm form) {
 		log.info("success Process: {}", form);
 
 		return "form/show_data";
 	}
 
-	@ModelAttribute("courses")
-	public List<String> courses() {
+	@ModelAttribute("availableCourses")
+	public List<String> availableCourses() {
 		List<String> courses = new ArrayList<String>();
-		courses.add("Maths");
-		courses.add("Physics");
-		courses.add("Geometry");
-		courses.add("Algebra");
-		courses.add("Painting");
+		courses.add("Java");
+		courses.add("Python");
+		courses.add("NodeJS");
+		courses.add("AngularJS");
+		courses.add("PHP");
 		return courses;
 	}
 
-	@ModelAttribute("tutors")
-	public List<String> tutors() {
+	@ModelAttribute("availableTutors")
+	public List<String> availableTutors() {
 		List<String> tutors = new ArrayList<String>();
 		tutors.add("Mrs Smith");
-		tutors.add("Mr Johnson");
-		tutors.add("Mr Clarks");
+		tutors.add("Mrs Croft");
+		tutors.add("Mr Wayne");
+		tutors.add("Mr Kent");
 		return tutors;
 	}
 
 	@ModelAttribute("genders")
 	public List<String> genders() {
 		List<String> genders = new ArrayList<String>();
-		genders.add("Male");
 		genders.add("Female");
+		genders.add("Male");
 		return genders;
 	}
 

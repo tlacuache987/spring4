@@ -58,7 +58,7 @@
 			<tr>
 				<td>Favorite Courses:</td>
 				<td>
-					<form:checkboxes path="courses" items="${courses}" />
+					<form:checkboxes path="courses" items="${availableCourses}" />
 				</td>
 				<td>
 					<form:errors path="courses" cssStyle="color: #ff0000;" />
@@ -69,7 +69,7 @@
 				<td>
 					<form:select path="tutor">
 						<form:option value="" label="...." />
-						<form:options items="${tutors}" />
+						<form:options items="${availableTutors}" />
 					</form:select>
 				</td>
 				<td>
