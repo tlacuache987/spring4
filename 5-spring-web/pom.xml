@@ -97,6 +97,13 @@
 				<artifactId>spring-orm</artifactId>
 				<version>${springframework-version}</version>
 			</dependency>
+			
+			<!-- Spring OXM -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-oxm</artifactId>
+				<version>${springframework-version}</version>
+			</dependency>
 
 			<!-- Spring Security -->
 			<dependency>
