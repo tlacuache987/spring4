@@ -17,12 +17,13 @@
 		<module>5-spring-web-utils</module>
 		<module>5-spring-web-mvc-hello-world</module>
 		<module>5-spring-web-mvc-hello-world-javaconfig-no-webxml</module>
+		<module>5-spring-web-mvc-hello-world-security</module>
 	</modules>
 
 	<properties>
 		<java-version>1.8</java-version>
 		<springframework-version>4.2.4.RELEASE</springframework-version>
-		<spring-security.version>4.0.3.RELEASE</spring-security.version>
+		<spring-security.version>3.2.9.RELEASE</spring-security.version> <!-- 4.0.3 -->
 		<jstl.version>1.2</jstl.version>
 		<lombok-version>1.16.6</lombok-version>
 		<junit-version>4.12</junit-version>
@@ -97,7 +98,7 @@
 				<artifactId>spring-orm</artifactId>
 				<version>${springframework-version}</version>
 			</dependency>
-			
+
 			<!-- Spring OXM -->
 			<dependency>
 				<groupId>org.springframework</groupId>
