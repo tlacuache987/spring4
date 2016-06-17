@@ -26,9 +26,8 @@
 			<li><a href="${site_url}userSection" data-seccion="userSection">User
 					Section</a></li>
 
-
-			<li><a href="#" data-href-url="${site_url}logout" data-seccion="logout">Logout</a></li>
-
+			<li><a href="#" data-href-url="${site_url}logout"
+				data-seccion="logout">Logout</a></li>
 
 		</security:authorize>
 

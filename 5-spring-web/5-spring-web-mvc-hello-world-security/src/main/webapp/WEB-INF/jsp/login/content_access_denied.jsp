@@ -6,10 +6,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<h1>¡ Acceso Denegado !</h1>
+<h1>¡ Access denied !</h1>
 
 <br />
 
-<h3>Lo sentimos, usted no tiene permisos para visualizar esta
-	página</h3>
-<h3>Póngase en contacto con el administrador del sistema.</h3>
+<h3>Sorry, you do not have permission to view this page</h3>
+<h3>Contact your system administrator.</h3>
