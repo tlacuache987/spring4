@@ -1,9 +1,9 @@
-package org.certificatic.practica1.interfaces.operations.api.impl;
+package org.certificatic.practica1.interfaces.operations.v3.api.impl;
 
-import org.certificatic.practica1.interfaces.operations.api.IAdd;
-import org.certificatic.practica1.interfaces.operations.api.IDivide;
-import org.certificatic.practica1.interfaces.operations.api.IMultiply;
-import org.certificatic.practica1.interfaces.operations.api.ISubtract;
+import org.certificatic.practica1.interfaces.operations.v3.api.IAdd;
+import org.certificatic.practica1.interfaces.operations.v3.api.IDivide;
+import org.certificatic.practica1.interfaces.operations.v3.api.IMultiply;
+import org.certificatic.practica1.interfaces.operations.v3.api.ISubtract;
 
 public class SimpleCalculator extends Calculator<SimpleCalculator> implements IAdd, ISubtract, IMultiply, IDivide {
 

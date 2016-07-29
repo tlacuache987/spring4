@@ -1,9 +1,9 @@
-package org.certificatic.practica1.interfaces.operations.test;
+package org.certificatic.practica1.interfaces.operations.v2.test;
 
 import java.text.DecimalFormat;
 
-import org.certificatic.practica1.interfaces.operations.api.ICalculator;
-import org.certificatic.practica1.interfaces.operations.api.impl.KidsCalculator;
+import org.certificatic.practica1.interfaces.operations.v2.api.IKidsCalculator;
+import org.certificatic.practica1.interfaces.operations.v2.api.impl.KidsCalculator;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,13 +18,13 @@ public class KidsCalculatorTest {
 	public void kidsCalculatorTest() {
 		log.info("kidsCalculatorTest -------------------");
 
-		final ICalculator<?> kidsCal = new KidsCalculator();
-		final ICalculator<?> kidsCal2 = new KidsCalculator();
+		final IKidsCalculator kidsCal = new KidsCalculator();
+		final IKidsCalculator kidsCal2 = new KidsCalculator();
 
 		final double expectedValue = 6D;
 
-		((KidsCalculator) kidsCal).set(5).add(5).add(5).add(-5).subtract(4);
-		((KidsCalculator) kidsCal2).set(-5).add(5).add(5).subtract(4).add(5);
+		kidsCal.set(5).add(5).add(5).add(-5).subtract(4);
+		kidsCal2.set(-5).add(5).add(5).subtract(4).add(5);
 
 		log.info("kidsCal.result(): {}", df.format(kidsCal.result()));
 		log.info("kidsCal2.result(): {}", df.format(kidsCal2.result()));

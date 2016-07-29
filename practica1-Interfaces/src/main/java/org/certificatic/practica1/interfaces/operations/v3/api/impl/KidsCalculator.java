@@ -1,7 +1,7 @@
-package org.certificatic.practica1.interfaces.operations.api.impl;
+package org.certificatic.practica1.interfaces.operations.v3.api.impl;
 
-import org.certificatic.practica1.interfaces.operations.api.IAdd;
-import org.certificatic.practica1.interfaces.operations.api.ISubtract;
+import org.certificatic.practica1.interfaces.operations.v3.api.IAdd;
+import org.certificatic.practica1.interfaces.operations.v3.api.ISubtract;
 
 public class KidsCalculator extends Calculator<KidsCalculator> implements IAdd, ISubtract {
 

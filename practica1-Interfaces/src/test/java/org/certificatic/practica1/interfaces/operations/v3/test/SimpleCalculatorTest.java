@@ -1,10 +1,9 @@
-package org.certificatic.practica1.interfaces.operations.test;
+package org.certificatic.practica1.interfaces.operations.v3.test;
 
 import java.text.DecimalFormat;
 
-import org.certificatic.practica1.interfaces.operations.api.ICalculator;
-import org.certificatic.practica1.interfaces.operations.api.impl.KidsCalculator;
-import org.certificatic.practica1.interfaces.operations.api.impl.SimpleCalculator;
+import org.certificatic.practica1.interfaces.operations.v3.api.ICalculator;
+import org.certificatic.practica1.interfaces.operations.v3.api.impl.SimpleCalculator;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
-package org.certificatic.practica1.interfaces.operations.api.impl;
+package org.certificatic.practica1.interfaces.operations.v3.api.impl;
 
-import org.certificatic.practica1.interfaces.operations.api.ICalculator;
+import org.certificatic.practica1.interfaces.operations.v3.api.ICalculator;
 
 import lombok.AccessLevel;
 import lombok.Getter;

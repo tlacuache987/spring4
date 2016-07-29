@@ -13,11 +13,18 @@ public class HolaMundoNoSpringTest {
 	public void holaMundoNoSpringTest() {
 		log.info("holaMundoNoSpringTest -------------------");
 		
-		HolaMundo hola = new HolaMundo("Hola Mundo");
+		HolaMundo hola = null;
 
-		log.info("{}", hola);
+		// por constructor
+		// hola = new HolaMundo("hola =)");
+
+		// por setter
+		hola = new HolaMundo();
+		hola.setMensaje("hola =");
 
 		Assert.assertNotNull(hola);
+
+		log.info("{}", hola);
 	}
 
 }
