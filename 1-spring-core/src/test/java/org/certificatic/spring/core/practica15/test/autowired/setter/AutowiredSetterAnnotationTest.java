@@ -16,12 +16,23 @@ public class AutowiredSetterAnnotationTest {
 
 		log.info("autowiredSetterAnnotationTest -------------------");
 
-		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-				"spring/practica15/annotations-autowired-setter-application-context.xml");
+		String ctxFile = "spring/practica15/annotations-autowired-setter-application-context.xml";
+
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(ctxFile);
 
 		Journalist jouralist = applicationContext.getBean(Journalist.class);
 
 		Assert.assertNotNull(jouralist);
+
+		Assert.assertNull(jouralist.getDni());
+
+		Assert.assertNotNull(jouralist.getName());
+
+		Assert.assertNotNull(jouralist.getAge());
+
+		Assert.assertNotNull(jouralist.getNotebook());
+
+		Assert.assertNotNull(jouralist.getPen());
 
 		log.info("jouralist: {}", jouralist);
 

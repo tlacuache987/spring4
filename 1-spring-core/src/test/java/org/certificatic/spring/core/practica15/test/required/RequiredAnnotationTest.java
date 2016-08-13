@@ -17,12 +17,19 @@ public class RequiredAnnotationTest {
 
 		log.info("requiredAnnotationTest -------------------");
 
-		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-				"spring/practica15/annotations-required-application-context.xml");
+		String ctxFile = "spring/practica15/annotations-required-application-context.xml";
+
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(ctxFile);
 
 		Cameraman cameraman = applicationContext.getBean("okCameraman", Cameraman.class);
 
 		Assert.assertNotNull(cameraman);
+
+		Assert.assertNotNull(cameraman.getName());
+
+		Assert.assertNotNull(cameraman.getDni());
+
+		Assert.assertNull(cameraman.getAge());
 
 		log.info("cameraman: {}", cameraman);
 
@@ -34,8 +41,9 @@ public class RequiredAnnotationTest {
 
 		log.info("badRequiredAnnotationTest -------------------");
 
-		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-				"spring/practica15/annotations-required-application-context.xml");
+		String ctxFile = "spring/practica15/annotations-required-application-context.xml";
+
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(ctxFile);
 
 		Cameraman cameraman = applicationContext.getBean("badCameraman", Cameraman.class);
 

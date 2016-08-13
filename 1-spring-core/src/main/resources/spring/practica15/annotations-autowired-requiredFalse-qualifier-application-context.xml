@@ -35,11 +35,11 @@
 		</property>
 	</bean>
 
-	<util:list id="passengers" list-class="java.util.ArrayList"
+	<!-- util:list id="passengers" list-class="java.util.ArrayList"
 		value-type="java.lang.String">
 		<value>Passenger 1</value>
 		<value>Passenger 2</value>
 		<value>Passenger 3</value>
-	</util:list>
+	</util:list -->
 
 </beans>

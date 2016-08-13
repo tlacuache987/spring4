@@ -29,6 +29,14 @@ public class Jsr250AnnotationTest {
 
 		Assert.assertNotNull(student);
 
+		Assert.assertNotNull(student.getName());
+
+		Assert.assertNotNull(student.getEnrollment());
+
+		Assert.assertNotNull(student.getSubject());
+
+		Assert.assertNotNull(student.getMathematics());
+
 		log.info("student: {}", student);
 
 		((AbstractApplicationContext) applicationContext).close();

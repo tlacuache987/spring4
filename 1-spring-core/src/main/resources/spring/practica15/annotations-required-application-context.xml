@@ -8,15 +8,28 @@
 
 	<bean id="okCameraman"
 		class="org.certificatic.spring.core.practica15.required.bean.Cameraman">
-		<property name="name" value="Lara Croft" />
-		<property name="dni" value="XXX-YYY-ZZZ" />
-		<property name="age" value="32" />
+		<!-- 
+		<property name="name" value="Lara Croft" /> 
+		<property name="dni" value="XXX-YYY-ZZZ" /> 
+		-->
+		<property name="name" ref="name" />
+		<property name="dni" ref="dni" />
 	</bean>
 
 
 	<bean id="badCameraman" scope="prototype"
-		class="org.certificatic.spring.core.practica15.required.bean.Cameraman">
+		class="org.certificatic.spring.core.practica15.required.bean.Cameraman" />
+		
+	<bean id="name" class="java.lang.String">
+		<constructor-arg>
+			<value>Lara Croft</value>
+		</constructor-arg>
+	</bean>
 
+	<bean id="dni" class="java.lang.String">
+		<constructor-arg>
+			<value>DNI-1322-QWERTY</value>
+		</constructor-arg>
 	</bean>
 
 </beans>

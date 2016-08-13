@@ -16,12 +16,23 @@ public class AutowiredMethodsAnnotationTest {
 
 		log.info("autowiredMethodsAnnotationTest -------------------");
 
-		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-				"spring/practica15/annotations-autowired-methods-application-context.xml");
+		String ctxFile = "spring/practica15/annotations-autowired-methods-application-context.xml";
+
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(ctxFile);
 
 		Student student = applicationContext.getBean(Student.class);
 
 		Assert.assertNotNull(student);
+
+		Assert.assertNull(student.getDni());
+
+		Assert.assertNotNull(student.getName());
+
+		Assert.assertNotNull(student.getAge());
+
+		Assert.assertNotNull(student.getNotebook());
+
+		Assert.assertNotNull(student.getPen());
 
 		log.info("student: {}", student);
 

@@ -16,12 +16,23 @@ public class AutowiredConstructorAnnotationTest {
 
 		log.info("autowiredConstructorAnnotationTest -------------------");
 
-		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-				"spring/practica15/annotations-autowired-constructor-application-context.xml");
+		String ctxFile = "spring/practica15/annotations-autowired-constructor-application-context.xml";
+
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(ctxFile);
 
 		Engineer engineer = applicationContext.getBean(Engineer.class);
 
 		Assert.assertNotNull(engineer);
+
+		Assert.assertNull(engineer.getDni());
+
+		Assert.assertNotNull(engineer.getName());
+
+		Assert.assertNotNull(engineer.getAge());
+
+		Assert.assertNotNull(engineer.getNotebook());
+
+		Assert.assertNotNull(engineer.getPen());
 
 		log.info("engineer: {}", engineer);
 

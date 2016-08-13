@@ -16,12 +16,17 @@ public class AutowiredRequredFalseQualifierAnnotationTest {
 
 		log.info("autowiredPropertiesAnnotationTest -------------------");
 
-		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-				"spring/practica15/annotations-autowired-requiredFalse-qualifier-application-context.xml");
+		String ctxFile = "spring/practica15/annotations-autowired-requiredFalse-qualifier-application-context.xml";
+
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(ctxFile);
 
 		Airplane airplane = applicationContext.getBean(Airplane.class);
 
 		Assert.assertNotNull(airplane);
+
+		Assert.assertNotNull(airplane.getAirline());
+
+		Assert.assertNull(airplane.getAirplaneCode());
 
 		log.info("airplane: {}", airplane);
 

@@ -6,7 +6,7 @@ public class Numerical {
 			"cinco", "seis", "siete", "ocho", "nueve" };
 
 	private final String[] DOZENS = { "diez", "once", "doce", "trece",
-			"cuatorce", "quince", "dieciseis", "diecisiete", "dieciocho",
+			"catorce", "quince", "dieciseis", "diecisiete", "dieciocho",
 			"diecinueve", "veinte", "treina", "cuarenta", "cincuenta",
 			"sesenta", "setenta", "ochenta", "noventa" };
 

@@ -16,12 +16,23 @@ public class AutowiredPropertiesAnnotationTest {
 
 		log.info("autowiredPropertiesAnnotationTest -------------------");
 
-		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-				"spring/practica15/annotations-autowired-property-application-context.xml");
+		String ctxFile = "spring/practica15/annotations-autowired-property-application-context.xml";
+
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(ctxFile);
 
 		Reporter reporter = applicationContext.getBean(Reporter.class);
 
 		Assert.assertNotNull(reporter);
+
+		Assert.assertNull(reporter.getDni());
+
+		Assert.assertNotNull(reporter.getName());
+
+		Assert.assertNotNull(reporter.getAge());
+
+		Assert.assertNotNull(reporter.getNotebook());
+
+		Assert.assertNotNull(reporter.getPen());
 
 		log.info("reporter: {}", reporter);
 
