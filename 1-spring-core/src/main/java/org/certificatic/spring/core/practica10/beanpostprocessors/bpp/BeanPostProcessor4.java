@@ -1,26 +1,18 @@
 package org.certificatic.spring.core.practica10.beanpostprocessors.bpp;
 
-import org.certificatic.spring.core.practica10.beanpostprocessors.bean.Worker;
 import org.certificatic.spring.core.practica10.beanpostprocessors.bean.api.IWorker;
+import org.certificatic.spring.core.practica10.beanpostprocessors.bean.proxy.WorkerProxy;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.core.Ordered;
 
-public class BeanPostProcessor1 implements BeanPostProcessor, Ordered {
+public class BeanPostProcessor4 implements BeanPostProcessor, Ordered {
 
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 
 		System.out.println("[Bean Post Process Before Initialization " + this.getOrder() + "]");
 
-		if (bean instanceof Worker) {
-			Worker t = (Worker) bean;
-
-			System.out.println("[BPP] Worker name: " + t.getName());
-
-			t.setName("Fake worker name");
-
-			System.out.println("[BPP] Changed Worker name: " + t.getName());
-		}
+		System.out.println("[BPP] Bean class: " + bean.getClass().getSimpleName());
 
 		return bean;
 	}
@@ -30,13 +22,19 @@ public class BeanPostProcessor1 implements BeanPostProcessor, Ordered {
 		System.out.println("[Bean Post Process After Initialization " + this.getOrder() + "]");
 
 		if (bean instanceof IWorker) {
-			IWorker t = (IWorker) bean;
+			IWorker w = (IWorker) bean;
 
-			System.out.println("[BPP] Worker name: " + t.getName());
+			WorkerProxy workerProxy = new WorkerProxy();
 
-			t.setName("Great worker name");
+			workerProxy.setAge(30);
+			workerProxy.setName("Chuck Norris");
+			workerProxy.setWorker(w);
 
-			System.out.println("[BPP] Changed Worker name: " + t.getName());
+			System.out.println("[BPP] Worker name: " + w.getName());
+
+			System.out.println("[BPP] Changed Worker name: " + w.getName());
+
+			bean = workerProxy;
 		}
 
 		return bean;
@@ -44,6 +42,6 @@ public class BeanPostProcessor1 implements BeanPostProcessor, Ordered {
 
 	@Override
 	public int getOrder() {
-		return 1;
+		return 4;
 	}
 }

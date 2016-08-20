@@ -14,8 +14,7 @@ public class LazyInitTest {
 
 	@BeforeClass
 	public static void beforeClass() {
-		applicationContext = new ClassPathXmlApplicationContext(
-				"spring/practica7/lazy-initialization-application-context.xml");
+		applicationContext = new ClassPathXmlApplicationContext("spring/practica7/lazy-init-application-context.xml");
 	}
 
 	@Test

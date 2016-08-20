@@ -9,7 +9,7 @@
 	<bean class="java.lang.String">
 		<constructor-arg>
 			<value>
-				dbc:mysql://localhost:3306/test
+				jdbc:mysql://localhost:3306/test
 			</value>
 		</constructor-arg>
 	</bean>

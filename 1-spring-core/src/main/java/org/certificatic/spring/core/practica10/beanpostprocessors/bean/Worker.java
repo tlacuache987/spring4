@@ -1,11 +1,13 @@
 package org.certificatic.spring.core.practica10.beanpostprocessors.bean;
 
+import org.certificatic.spring.core.practica10.beanpostprocessors.bean.api.IWorker;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @ToString
-public class Worker {
+public class Worker implements IWorker {
 	private @Getter @Setter String name;
 	private @Getter @Setter int age;
 
@@ -26,8 +28,7 @@ public class Worker {
 	}
 
 	public void showInfo() {
-		String msg = String.format("> I'm Worker: %s. [%s]",
-				this.name, this.hashCode());
+		String msg = String.format("> I'm Worker: %s. [%s]", this.name, this.hashCode());
 
 		System.out.println("[showInfo] " + msg);
 	}
