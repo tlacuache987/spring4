@@ -7,9 +7,6 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
-	<context:component-scan
-		base-package="org.certificatic.spring.core.practica20.resources.bean" />
-
 	<bean
 		class="org.certificatic.spring.core.practica20.resources.bean.Resources">
 		<property name="txtFile"
@@ -20,8 +17,12 @@
 			value="classpath:spring/practica20/my-properties.properties" />
 		<property name="urlFile" value="https://spring.io/" />
 	</bean>
-
-	<!-- bean
+	
+	<context:component-scan
+		base-package="org.certificatic.spring.core.practica20.resources.bean" />
+	
+	<!-- 
+	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
@@ -35,8 +36,10 @@
 				<prop key="favourite.rockband.second">AC/DC</prop>
 			</props>
 		</property>
-	</bean -->
+	</bean>
+	-->
 	
+	<!-- --> 
 	<context:property-placeholder  location="classpath:spring/practica20/*-props.properties,
 		classpath:spring/practica20/app.properties" properties-ref="definedProperties" />
 		
@@ -44,6 +47,6 @@
 		<prop key="favourite.rockband.first">Guns n' Roses</prop>
 		<prop key="favourite.rockband.second">AC/DC</prop>
 	</util:properties>
-	
+	<!-- -->
 	
 </beans>

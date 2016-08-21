@@ -13,8 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:/spring/practica20/resources-application-context.xml")
+@ContextConfiguration(locations = ResourceLoaderAwareTest.location)
 public class ResourceLoaderAwareTest {
+
+	public static final String location = "classpath:/spring/practica20/resources-application-context.xml";
 
 	@Inject
 	private BeanResourceLoaderAware beanResourceLoaderAware;
@@ -50,8 +52,9 @@ public class ResourceLoaderAwareTest {
 
 		log.info("loadAndCopyImageResourceLoaderAwareTest -------------------");
 
-		ResourcesTestUtils.loadAndCopyImage(beanResourceLoaderAware.getResourceLoader()
-				.getResource("file:src/main/resources/spring/practica20/logo.png"),
+		ResourcesTestUtils.loadAndCopyImage(
+				beanResourceLoaderAware.getResourceLoader()
+						.getResource("file:src/main/resources/spring/practica20/logo.png"),
 				"src/main/resources/spring/practica20/copy-resource-loader-aware/");
 	}
 }

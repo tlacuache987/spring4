@@ -13,8 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:/spring/practica20/resources-application-context.xml")
+@ContextConfiguration(locations = ResourcesTest.location)
 public class ResourcesTest {
+
+	public static final String location = "classpath:/spring/practica20/resources-application-context.xml";
 
 	@Inject
 	private Resources resources;

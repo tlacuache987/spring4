@@ -33,8 +33,7 @@ public class ResourcesTestUtils {
 	@SneakyThrows
 	public static void loadTextFile(Resource resource) {
 
-		String expectedText = "Lorem ipsum dolor sit amet, \n"
-				+ "consectetur adipiscing elit, \n"
+		String expectedText = "Lorem ipsum dolor sit amet, \n" + "consectetur adipiscing elit, \n"
 				+ "sed eiusmod tempor incidunt ut labore et dolore magna aliqua. \n\n"
 				+ "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
@@ -42,27 +41,26 @@ public class ResourcesTestUtils {
 
 		Assert.assertEquals(expectedText, readText);
 
-		log.info("textFile: {}", readText);
+		log.info("\ntextFile: {}", readText);
 	}
 
 	@SneakyThrows
 	public static void loadPropertiesFile(Resource resource) {
 
-		String expectedText = "certificatic.curso=Spring Framework 4\n" +
-				"certificatic.instructor=Ivan García";
+		String expectedText = "certificatic.curso=Spring Framework 4\n" + "certificatic.instructor=Ivan García";
 
 		String readText = isrr.read(resource.getInputStream());
 
 		Assert.assertEquals(expectedText, readText);
 
-		log.info("propertiesFile: {}", readText);
+		log.info("\npropertiesFile: {}", readText);
 
 		Properties properties = new Properties();
 		properties.load(resource.getInputStream());
 
 		Assert.assertEquals("Ivan García", properties.getProperty("certificatic.instructor"));
 
-		log.info("certificatic.instructor: {}", properties.getProperty("certificatic.instructor"));
+		log.info("\ncertificatic.instructor: {}", properties.getProperty("certificatic.instructor"));
 	}
 
 	@SneakyThrows
@@ -71,13 +69,13 @@ public class ResourcesTestUtils {
 
 		String readText = isrr.read(resource.getInputStream());
 
-		log.info("URLFile: {}", readText);
+		log.info("\nURLFile: {}", readText);
 
 		Document doc = Jsoup.parse(readText);
 
 		Assert.assertEquals(expectedText, doc.title());
 
-		log.info("HTML <title>: {}", doc.title());
+		log.info("\nHTML <title>: {}", doc.title());
 
 	}
 
@@ -85,8 +83,7 @@ public class ResourcesTestUtils {
 	public static void loadAndCopyImage(Resource resource, String copyPath) {
 		String expectedText = "logo.png";
 
-		FileCopyUtils.copy(resource.getInputStream(),
-				new FileOutputStream(new File(copyPath, resource.getFilename())));
+		FileCopyUtils.copy(resource.getInputStream(), new FileOutputStream(new File(copyPath, resource.getFilename())));
 
 		Path path = Paths.get(copyPath + resource.getFilename());
 
