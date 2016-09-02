@@ -40,7 +40,7 @@
 	-->
 	
 	<!-- --> 
-	<context:property-placeholder  location="classpath:spring/practica20/*-props.properties,
+	<context:property-placeholder location="classpath:spring/practica20/*-props.properties,
 		classpath:spring/practica20/app.properties" properties-ref="definedProperties" />
 		
 	<util:properties id="definedProperties">

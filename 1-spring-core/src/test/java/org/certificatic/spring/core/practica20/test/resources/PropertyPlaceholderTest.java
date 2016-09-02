@@ -1,7 +1,5 @@
 package org.certificatic.spring.core.practica20.test.resources;
 
-import javax.inject.Inject;
-
 import org.certificatic.spring.core.practica20.resources.bean.FavouriteRockBands;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,8 +17,16 @@ public class PropertyPlaceholderTest {
 
 	public static final String location = "classpath:/spring/practica20/resources-application-context.xml";
 
-	@Inject
+	// @Inject
+	// @Value("#{ favouriteRockBand }")
+	// @Value("#{ @favouriteRockBand }")
+	@Value("#{ @'favouriteRockBand' }")
 	private FavouriteRockBands rockbands;
+
+	@Value("#{ favouriteRockBand.toString }")
+	// @Value("#{ @favouriteRockBand.toString() }")
+	// @Value("#{ @'favouriteRockBand'.toString }")
+	private String rockbandsToString;
 
 	@Value("${service.name}")
 	private String serviceName;
@@ -49,6 +55,10 @@ public class PropertyPlaceholderTest {
 
 		Assert.assertEquals("Guns n' Roses", rockbands.getFirstRockBand());
 		Assert.assertEquals("AC/DC", rockbands.getSecondRockBand());
+
+		Assert.assertEquals("My favourites rockbands are: Guns n' Roses and AC/DC", rockbands.toString());
+
+		Assert.assertEquals("My favourites rockbands are: Guns n' Roses and AC/DC", rockbandsToString);
 
 		log.info("rockbands: {}", rockbands);
 	}

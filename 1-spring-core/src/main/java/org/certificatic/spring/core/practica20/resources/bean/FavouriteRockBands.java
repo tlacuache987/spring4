@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Data
-@Component
+@Component("favouriteRockBand")
 public class FavouriteRockBands {
 
 	@Value("${favourite.rockband.first}")

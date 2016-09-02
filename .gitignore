@@ -14,6 +14,9 @@ local.properties
 */target/
 **/target/
 
+/spring-integration-intertech
+/6-spring-extras
+
 # Eclipse Core
 .project
 

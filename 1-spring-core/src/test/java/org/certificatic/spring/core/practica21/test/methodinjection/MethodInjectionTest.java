@@ -27,6 +27,8 @@ public class MethodInjectionTest {
 	public void setUp() {
 		Assert.assertNotNull(singletonBean1);
 		Assert.assertNotNull(singletonBean2);
+		Assert.assertSame(singletonBean1, singletonBean2);
+		Assert.assertNotSame(singletonBean1.getProcessor(), singletonBean2.getProcessor());
 	}
 
 	@Test

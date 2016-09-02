@@ -13,16 +13,16 @@
 		<property name="initialNumber" value="#{gessNumberBean.randomNumber}" />
 	</bean>
 
+
 	<bean
 		class="org.certificatic.spring.core.practica21.spel.bean.MyBeanResolver" />
 
-
 	<bean id="societyStub"
 		class="org.certificatic.spring.core.practica21.test.spel.model.stub.SocietyStub" />
-
 	<bean id="teslaBean"
 		class="org.certificatic.spring.core.practica21.spel.model.Inventor"
 		factory-bean="societyStub" factory-method="createInventorTesla" />
+
 
 	<!-- Method injection -->
 	<bean

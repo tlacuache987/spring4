@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.expression.ExpressionParser;
-import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
@@ -31,7 +30,7 @@ public class TernaryElvisAndSelfNavigationOperatorsExpressionsTest_8 {
 		applicationContext = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 
 		springContext = new StandardEvaluationContext();
-		((StandardEvaluationContext) springContext).setBeanResolver(applicationContext.getBean(MyBeanResolver.class));
+		springContext.setBeanResolver(applicationContext.getBean(MyBeanResolver.class));
 	}
 
 	@Test
@@ -39,15 +38,10 @@ public class TernaryElvisAndSelfNavigationOperatorsExpressionsTest_8 {
 
 		log.info("templatingExpressionsTest -------------------");
 
-		springContext.setVariable("name", "Ivan García");
 		springContext.setVariable("random", new Random());
 
-		String greeting = spelParser
-				.parseExpression(
-						"Hi #{ #name +' '+'you''re' } #{ #random.nextInt(100)%2 == 0 ? 'awesome' : 'handsome' } !",
-						new TemplateParserContext())
-				.getValue(springContext,
-						String.class);
+		String greeting = spelParser.parseExpression("#random.nextInt(100)%2 == 0 ? 'awesome' : 'handsome'")
+				.getValue(springContext, String.class);
 
 		Assert.assertNotNull(greeting);
 		log.info("greeting: {}", greeting);
@@ -74,6 +68,10 @@ public class TernaryElvisAndSelfNavigationOperatorsExpressionsTest_8 {
 		log.info("name: {}", name);
 
 		name = spelParser.parseExpression("#name").getValue(springContext, String.class);
+		Assert.assertNull(name);
+		log.info("name: {}", name);
+
+		name = spelParser.parseExpression("#name2").getValue(springContext, String.class);
 		Assert.assertNull(name);
 		log.info("name: {}", name);
 	}

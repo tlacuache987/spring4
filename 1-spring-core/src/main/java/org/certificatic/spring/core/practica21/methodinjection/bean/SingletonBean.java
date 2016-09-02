@@ -18,5 +18,5 @@ public abstract class SingletonBean {
 		return processor.processData(data, iterations);
 	}
 
-	protected abstract IProcessor getProcessor();
+	public abstract IProcessor getProcessor();
 }

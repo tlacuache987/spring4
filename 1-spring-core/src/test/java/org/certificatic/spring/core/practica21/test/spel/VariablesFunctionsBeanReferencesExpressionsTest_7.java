@@ -36,7 +36,7 @@ public class VariablesFunctionsBeanReferencesExpressionsTest_7 {
 		applicationContext = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 
 		springContext = new StandardEvaluationContext();
-		((StandardEvaluationContext) springContext).setBeanResolver(applicationContext.getBean(MyBeanResolver.class));
+		springContext.setBeanResolver(applicationContext.getBean(MyBeanResolver.class));
 	}
 
 	@Test
@@ -73,17 +73,14 @@ public class VariablesFunctionsBeanReferencesExpressionsTest_7 {
 		springContext.setVariable("b", 4);
 		springContext.setVariable("c", -10);
 
-		springContext.registerFunction("chicharronera",
-				Chicharronera.class.getDeclaredMethod("calculate",
-						new Class[] { double.class, double.class, double.class }));
+		springContext.registerFunction("chicharronera", Chicharronera.class.getDeclaredMethod("calculate",
+				new Class[] { double.class, double.class, double.class }));
 
 		QuadraticEquationResult expectedResult = QuadraticEquationResult.builder().x1(new Complex(1.0697, 0.0))
 				.x2(new Complex(-1.8697, 0.0)).build();
 
 		QuadraticEquationResult quadraticEquationResult = spelParser.parseExpression("#chicharronera(#a, #b, #c)")
-				.getValue(
-						springContext,
-						QuadraticEquationResult.class);
+				.getValue(springContext, QuadraticEquationResult.class);
 
 		Assert.assertNotNull(quadraticEquationResult);
 		Assert.assertEquals(expectedResult, quadraticEquationResult);
@@ -101,8 +98,7 @@ public class VariablesFunctionsBeanReferencesExpressionsTest_7 {
 		Assert.assertNotNull(guessNumber);
 		log.info("guessNumber: {}", guessNumber);
 
-		Inventor tesla = spelParser.parseExpression("@teslaBean").getValue(springContext,
-				Inventor.class);
+		Inventor tesla = spelParser.parseExpression("@teslaBean").getValue(springContext, Inventor.class);
 		Assert.assertNotNull(tesla);
 		log.info("tesla: {}", tesla);
 
