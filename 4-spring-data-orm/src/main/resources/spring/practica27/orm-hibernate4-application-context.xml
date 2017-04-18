@@ -22,10 +22,8 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="javax.persistence.validation.group.pre-persist"></prop>
-				<prop key="javax.persistence.validation.group.pre-update"></prop>
-				<prop key="javax.persistence.validation.group.pre-remove"></prop>
-
+				<!-- <prop key="javax.persistence.validation.group.pre-persist"></prop> 
+					<prop key="javax.persistence.validation.group.pre-update"></prop> <prop key="javax.persistence.validation.group.pre-remove"></prop> -->
 				<prop key="hibernate.hbm2ddl.auto">none</prop>
 				<prop key="dialect">org.hibernate.dialect.H2Dialect</prop>
 			</props>

@@ -14,9 +14,11 @@
 
 	<bean
 		class="org.certificatic.spring.core.practica13.autowire.bean.WheelGroup"
-		autowire="byName" scope="prototype" />
+		autowire="byType" scope="prototype" />
 
-	<util:list id="wheelList" list-class="java.util.ArrayList" scope="prototype">
+	<util:list id="wheelList" list-class="java.util.ArrayList"
+		value-type="org.certificatic.spring.core.practica13.autowire.bean.Wheel"
+		scope="prototype">
 		<ref bean="wheel" />
 		<ref bean="wheel" />
 		<ref bean="wheel" />
