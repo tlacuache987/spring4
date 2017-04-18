@@ -19,37 +19,37 @@ public class Audiencia implements IAudiencia {
 	@Override
 	public void aplaudir() {
 		print(colorWriter.getColoredMessage(Color.BLUE,
-				"[Aspecto Audiencia] El público aplaude... clap, clap, clap...."));
+				"[Aspecto Audiencia] El publico aplaude... clap, clap, clap...."));
 	}
 
 	@Override
 	public void abuchear() {
 		print(colorWriter.getColoredMessage(Color.RED,
-				"[Aspecto Audiencia] El público abuchea... buuuuuuuuuuuu...."));
+				"[Aspecto Audiencia] El publico abuchea... buuuuuuuuuuuu...."));
 	}
 
 	@Override
 	public void sePoneDePie() {
 		print(colorWriter.getColoredMessage(Color.YELLOW,
-				"[Aspecto Audiencia] El público se pone de pie."));
+				"[Aspecto Audiencia] El publico se pone de pie."));
 	}
 
 	@Override
 	public void seSienta() {
 		print(colorWriter.getColoredMessage(Color.YELLOW,
-				"[Aspecto Audiencia] El público se sienta en su lugar."));
+				"[Aspecto Audiencia] El publico se sienta en su lugar."));
 	}
 
 	@Override
 	public void gritaGol() {
 		print(colorWriter.getColoredMessage(Color.GREEN,
-				"[Aspecto Audiencia] El público grita gol... GOOOOOOOOOOOOOOOOOOOOOOOOL !!!!"));
+				"[Aspecto Audiencia] El publico grita gol... GOOOOOOOOOOOOOOOOOOOOOOOOL !!!!"));
 	}
 
 	@Override
 	public void gritaOle() {
 		print(colorWriter.getColoredMessage(Color.MAGENTA,
-				"[Aspecto Audiencia] El público grita Ole... Ooooooleeeeeee..."));
+				"[Aspecto Audiencia] El publico grita Ole... Ooooooleeeeeee..."));
 	}
 
 	private void print(String mensaje) {
@@ -60,7 +60,7 @@ public class Audiencia implements IAudiencia {
 	public Object sePoneDeNervios(ProceedingJoinPoint pjp) throws Throwable {
 
 		print(colorWriter.getColoredMessage(Color.CYAN,
-				"[Aspecto Audiencia] El público se pone de nervios"));
+				"[Aspecto Audiencia] El publico se pone de nervios"));
 
 		Object o = pjp.proceed();
 
@@ -70,7 +70,7 @@ public class Audiencia implements IAudiencia {
 		this.aplaudir();
 
 		print(colorWriter.getColoredMessage(Color.CYAN,
-				"[Aspecto Audiencia] El público se deja de pone de nervios"));
+				"[Aspecto Audiencia] El publico se deja de pone de nervios"));
 
 		return o;
 	}

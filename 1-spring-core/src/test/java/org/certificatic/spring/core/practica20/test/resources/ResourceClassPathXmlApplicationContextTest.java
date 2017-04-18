@@ -25,7 +25,7 @@ public class ResourceClassPathXmlApplicationContextTest {
 
 		log.info("loadTextFileClasspathXmlApplicationContextTest -------------------");
 
-		Resource resource = applicationContext.getResource("file:c:/certificatic-resources/my-text-file.txt");
+		Resource resource = applicationContext.getResource("file:/Users/xvhx/certificatic-resources/my-text-file.txt");
 
 		ResourcesTestUtils.loadTextFile(resource);
 	}

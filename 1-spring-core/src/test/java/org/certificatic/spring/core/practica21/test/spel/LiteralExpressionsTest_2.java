@@ -18,9 +18,9 @@ public class LiteralExpressionsTest_2 {
 
 		ExpressionParser spelParser = new SpelExpressionParser();
 
-		Expression spelExpression = spelParser.parseExpression("'Ivan García'");
+		Expression spelExpression = spelParser.parseExpression("'Ivan Garcia'");
 		String stringExpression = (String) spelExpression.getValue();
-		Assert.assertEquals("Ivan García", stringExpression);
+		Assert.assertEquals("Ivan Garcia", stringExpression);
 		log.info("stringExpression: {}", stringExpression);
 
 		double doubleValue = (Double) spelParser.parseExpression("3.1416E+10").getValue();

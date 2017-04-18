@@ -15,7 +15,7 @@ public class ShortcutPunishStrategy implements IPunishStrategy {
 	@SneakyThrows
 	public Object punish(ProceedingJoinPoint pjp, boolean hacerTrampa) {
 		if (hacerTrampa)
-			return "No me he bañado en 5 dias";
+			return "No me he baÃ±ado en 5 dias";
 
 		Object o = pjp.proceed();
 		return o;

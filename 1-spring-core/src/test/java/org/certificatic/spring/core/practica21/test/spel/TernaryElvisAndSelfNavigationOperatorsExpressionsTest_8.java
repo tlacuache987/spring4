@@ -53,11 +53,11 @@ public class TernaryElvisAndSelfNavigationOperatorsExpressionsTest_8 {
 
 		log.info("elvisOperatorExpressionsTest -------------------");
 
-		springContext.setVariable("name", "Ivan García");
+		springContext.setVariable("name", "Ivan Garcia");
 
 		String name = spelParser.parseExpression("#name?:'Without name'").getValue(springContext, String.class);
 		Assert.assertNotNull(name);
-		Assert.assertEquals("Ivan García", name);
+		Assert.assertEquals("Ivan Garcia", name);
 		log.info("name: {}", name);
 
 		spelParser.parseExpression("#name").setValue(springContext, null);
@@ -81,7 +81,7 @@ public class TernaryElvisAndSelfNavigationOperatorsExpressionsTest_8 {
 
 		log.info("selfNavigationOperatorExpressionsTest2 -------------------");
 
-		springContext.setVariable("name", "Ivan García");
+		springContext.setVariable("name", "Ivan Garcia");
 
 		String name = spelParser.parseExpression("#name?.substring(0,4)").getValue(springContext, String.class);
 		Assert.assertNotNull(name);

@@ -31,7 +31,7 @@ public class NotificationServiceImpl implements INotificationService {
 			twitterMessageService.sendMessage(receiver, message);
 			break;
 		default:
-			System.out.println("Notification Type inválido");
+			System.out.println("Notification Type invalido");
 			break;
 		}
 	}

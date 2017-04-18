@@ -58,7 +58,7 @@ public class MagoSpringAopAspectJTest {
 
 		String pensamiento = voluntario.getPensamiento(joke);
 
-		String expectedPensamiento = "No me he bañado en 5 dias";
+		String expectedPensamiento = "No me he baÃ±ado en 5 dias";
 
 		Assert.assertEquals(expectedPensamiento, pensamiento);
 

@@ -60,7 +60,7 @@ public class PersonsRestController {
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<RestResponseError> getException() {
 		try {
-			throw new IllegalArgumentException("Argumentos Inválidos");
+			throw new IllegalArgumentException("Argumentos Invalidos");
 
 		} catch (IllegalArgumentException ex) {
 			String errorMessage = "Exception: " + ex.getMessage();

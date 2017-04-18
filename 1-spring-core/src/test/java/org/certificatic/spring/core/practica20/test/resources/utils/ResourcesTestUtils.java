@@ -47,7 +47,7 @@ public class ResourcesTestUtils {
 	@SneakyThrows
 	public static void loadPropertiesFile(Resource resource) {
 
-		String expectedText = "certificatic.curso=Spring Framework 4\n" + "certificatic.instructor=Ivan García";
+		String expectedText = "certificatic.curso=Spring Framework 4\n" + "certificatic.instructor=Ivan Garcia";
 
 		String readText = isrr.read(resource.getInputStream());
 
@@ -58,7 +58,7 @@ public class ResourcesTestUtils {
 		Properties properties = new Properties();
 		properties.load(resource.getInputStream());
 
-		Assert.assertEquals("Ivan García", properties.getProperty("certificatic.instructor"));
+		Assert.assertEquals("Ivan Garcia", properties.getProperty("certificatic.instructor"));
 
 		log.info("\ncertificatic.instructor: {}", properties.getProperty("certificatic.instructor"));
 	}

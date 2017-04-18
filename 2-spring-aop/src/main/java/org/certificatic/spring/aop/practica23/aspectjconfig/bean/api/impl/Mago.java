@@ -38,7 +38,7 @@ public class Mago implements IAdivinador {
 	@Before("cuandoUnVoluntarioPiensaEnAlgo(pensamiento)")
 	public void interceptarPensamiento(JoinPoint jp, String pensamiento) {
 		print(colorWriter.getColoredMessage(Color.YELLOW,
-				"[Mago] El voluntario se prepara para pensar en algo... [Pensará en: " + pensamiento + "]"));
+				"[Mago] El voluntario se prepara para pensar en algo... [Pensara en: " + pensamiento + "]"));
 
 		// print(Arrays.deepToString(jp.getArgs()));
 	}

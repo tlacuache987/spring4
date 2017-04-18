@@ -10,7 +10,7 @@ import org.certificatic.spring.core.practica18.jsr330.qualifiers.ManagerEmployee
 public class EmployeeManager extends Employee {
 
 	public EmployeeManager() {
-		this.name = "Ilse Hernández";
+		this.name = "Ilse Hernandez";
 		this.dni = "11-44-77-55";
 	}
 }

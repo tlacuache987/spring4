@@ -12,7 +12,7 @@ public class Worker implements IWorker {
 	private @Getter @Setter int age;
 
 	public Worker() {
-		this.name = "Ivan García";
+		this.name = "Ivan Garcia";
 		this.age = 10;
 
 		System.out.println("[Construct] Worker name: " + this.name);

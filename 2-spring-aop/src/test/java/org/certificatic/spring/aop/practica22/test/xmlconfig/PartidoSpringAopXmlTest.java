@@ -40,7 +40,7 @@ public class PartidoSpringAopXmlTest {
 		try {
 			jugador.cobrarPenal(true);
 		} catch (Throwable e) {
-			log.info("excepción: " + e.getMessage());
+			log.info("excepcion: " + e.getMessage());
 
 		}
 		log.info("------------");
@@ -48,7 +48,7 @@ public class PartidoSpringAopXmlTest {
 		try {
 			jugador.cobrarPenal(false);
 		} catch (Throwable e) {
-			log.info("excepción: " + e.getMessage());
+			log.info("excepcion: " + e.getMessage());
 		}
 		log.info("------------");
 
@@ -60,14 +60,14 @@ public class PartidoSpringAopXmlTest {
 			jugador.tirarAGol(false);
 
 		} catch (Throwable e) {
-			log.info("excepción: " + e.getMessage());
+			log.info("excepcion: " + e.getMessage());
 		}
 		log.info("------------");
 
 		try {
 			jugador.tirarAGol(true);
 		} catch (Throwable e) {
-			log.info("excepción: " + e.getMessage());
+			log.info("excepcion: " + e.getMessage());
 		}
 		log.info("------------");
 

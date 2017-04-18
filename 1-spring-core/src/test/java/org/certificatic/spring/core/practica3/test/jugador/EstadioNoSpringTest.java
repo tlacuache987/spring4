@@ -26,7 +26,7 @@ public class EstadioNoSpringTest {
 		Assert.assertNotNull(torneo);
 
 		Partido partido = new Partido();
-		partido.setNombre("México vs Australia");
+		partido.setNombre("Mexico vs Australia");
 
 		Assert.assertNotNull(partido);
 

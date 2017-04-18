@@ -27,7 +27,7 @@ public class ResourceLoaderAwareTest {
 		log.info("loadTextFileResourceLoaderAwareTest -------------------");
 
 		ResourcesTestUtils.loadTextFile(beanResourceLoaderAware.getResourceLoader()
-				.getResource("file:c:/certificatic-resources/my-text-file.txt"));
+				.getResource("file:/Users/xvhx/certificatic-resources/my-text-file.txt"));
 	}
 
 	@Test
